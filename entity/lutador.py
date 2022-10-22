@@ -1,4 +1,4 @@
-
+from entity.pessoa import Pessoa
 
 
 class Lutador(Pessoa):

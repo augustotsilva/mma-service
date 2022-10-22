@@ -1,4 +1,5 @@
-from lutador import *
+from entity.lutador import Lutador
+from entity.narrador import Narrador
 
 
 class Luta:

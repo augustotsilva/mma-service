@@ -1,13 +1,10 @@
 from view.view_luta import *
-from entity.luta import *
 
 
 class ControladorLuta:
-    def __init__(self, controlador_sistema):
-        if isinstance(controlador_sistema, ControladorSistema):
-            self.__controlador_sistema = controlador_sistema
+    def __init__(self):
         self.__lutas = []
-        self.__tela_luta = TelaLuta(self)
+        self.__tela_luta = TelaLuta()
         
     def pega_luta_por_id(self, id: int):
         for luta in self.__lutas:

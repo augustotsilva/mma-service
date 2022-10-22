@@ -1,3 +1,4 @@
+from entity.pessoa import Pessoa
 
 
 class Narrador(Pessoa):

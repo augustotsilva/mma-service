@@ -1,11 +1,4 @@
-from controller.controller_luta import *
-
-
 class TelaLuta:
-    def __init__(self, controlador_luta):
-        if isinstance(controlador_luta, ControladorLuta):
-            self.__controlador_luta = controlador_luta
-        
     def tela_opcoes(self):
         print("-------- LUTAS ----------")
         print("Escolha a opção")
@@ -15,9 +8,9 @@ class TelaLuta:
         print("4 - Excluir Luta")
         print("0 - Retornar")
 
-        opcao = self.le_num_inteiro("Escolha a opção:", [0,1,2,3,4])
+        opcao = self.le_num_inteiro("Escolha a opção:", [0, 1, 2, 3, 4])
         return opcao
-    
+
     def pega_dados_luta(self):
         # Falta exceções
         print("-------- DADOS LUTA ----------")
@@ -26,7 +19,7 @@ class TelaLuta:
                 id = int(input("ID: "))
                 break
             except:
-                print('Insira um valor inteiro')             
+                print('Insira um valor inteiro')
         lutador1 = input("Primeiro Lutador: ")
         lutador2 = input("Segundo Lutador: ")
         narradores = list(input('Narradores: '))
@@ -40,7 +33,8 @@ class TelaLuta:
                 print('Insira um valor inteiro')
         local = self.le_letra(input('Local da Luta: '))
 
-        return {"id": id, "lutador1": lutador1, 'lutador2': lutador2, "narradores": narradores, "data": data, "vencedor": vencedor, "card" : card, 'local': local}
+        return {"id": id, "lutador1": lutador1, 'lutador2': lutador2, "narradores": narradores, "data": data,
+                "vencedor": vencedor, "card": card, 'local': local}
 
     def mostra_luta(self, dados_luta):
         print('ID DA LUTA: ', dados_luta['id'])
@@ -52,7 +46,7 @@ class TelaLuta:
         print('CARD DA LUTA: ', dados_luta['card'])
         print('LOCAL DA LUTA: ', dados_luta['local'])
         print()
-        
+
     def seleciona_luta(self):
         while True:
             while True:
@@ -77,8 +71,8 @@ class TelaLuta:
     @property
     def controlador_luta(self):
         return self.__controlador_luta
-    
-    def le_num_inteiro(self, mensagem=" ", ints_validos = None):
+
+    def le_num_inteiro(self, mensagem=" ", ints_validos=None):
         while True:
             valor_lido = input(mensagem)
             try:
