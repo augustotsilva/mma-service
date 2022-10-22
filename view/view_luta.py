@@ -1,11 +1,13 @@
 from controller.controller_luta import *
-
+from controller.controller_lutador import *
 
 class TelaLuta:
-    def __init__(self, controlador_luta):
+    def __init__(self, controlador_luta, controlador_lutador):
         if isinstance(controlador_luta, ControladorLuta):
             self.__controlador_luta = controlador_luta
-        
+        if isinstance(controlador_lutador, ControladorLutador):
+            self.__controlador_lutador = controlador_lutador
+
     def tela_opcoes(self):
         print("-------- LUTAS ----------")
         print("Escolha a opção")
@@ -15,19 +17,25 @@ class TelaLuta:
         print("4 - Excluir Luta")
         print("0 - Retornar")
 
-        opcao = self.le_num_inteiro("Escolha a opção:", [0,1,2,3,4])
+        opcao = self.le_num_inteiro("Escolha a opção:", [0, 1, 2, 3, 4])
         return opcao
-    
+
     def pega_dados_luta(self):
         # Falta exceções
         print("-------- DADOS LUTA ----------")
         while True:
             try:
-                id = int(input("ID: "))
+                id = int(input("ID da Luta: "))
                 break
             except:
-                print('Insira um valor inteiro')             
-        lutador1 = input("Primeiro Lutador: ")
+                print('Insira um valor inteiro')
+            try:
+                id_lutador1 = input("ID do primeiro Lutador: ")
+                lutador1 = verifica_lutador(id_lutador1)
+            except Exception:
+                
+
+
         lutador2 = input("Segundo Lutador: ")
         narradores = list(input('Narradores: '))
         data = self.le_letra(input('Data da Luta: '))
@@ -40,7 +48,8 @@ class TelaLuta:
                 print('Insira um valor inteiro')
         local = self.le_letra(input('Local da Luta: '))
 
-        return {"id": id, "lutador1": lutador1, 'lutador2': lutador2, "narradores": narradores, "data": data, "vencedor": vencedor, "card" : card, 'local': local}
+        return {"id": id, "lutador1": lutador1, 'lutador2': lutador2, "narradores": narradores, "data": data,
+                "vencedor": vencedor, "card": card, 'local': local}
 
     def mostra_luta(self, dados_luta):
         print('ID DA LUTA: ', dados_luta['id'])
@@ -52,7 +61,7 @@ class TelaLuta:
         print('CARD DA LUTA: ', dados_luta['card'])
         print('LOCAL DA LUTA: ', dados_luta['local'])
         print()
-        
+
     def seleciona_luta(self):
         while True:
             while True:
@@ -77,8 +86,8 @@ class TelaLuta:
     @property
     def controlador_luta(self):
         return self.__controlador_luta
-    
-    def le_num_inteiro(self, mensagem=" ", ints_validos = None):
+
+    def le_num_inteiro(self, mensagem=" ", ints_validos=None):
         while True:
             valor_lido = input(mensagem)
             try:
@@ -98,4 +107,10 @@ class TelaLuta:
                 valor_errado = float(valor_lido)
                 print('Você digitou um número, e não uma palavra')
             except ValueError:
-                return valor_lido
+                return
+
+    def verifica_lutador(self, id):
+        if self.__controlador_lutador.pega_lutador_por_id(id) == None:
+            raise Exception
+        else:
+            return self.__controlador_lutador.pega_lutador_por_id(id)
