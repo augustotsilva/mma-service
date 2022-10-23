@@ -16,11 +16,17 @@ class TelaLuta:
         print("-------- DADOS LUTA ----------")
         while True:
             try:
-                id = int(input("ID: "))
+                id = int(input("ID da Luta: "))
                 break
             except:
                 print('Insira um valor inteiro')
-        lutador1 = input("Primeiro Lutador: ")
+            try:
+                id_lutador1 = input("ID do primeiro Lutador: ")
+                lutador1 = verifica_lutador(id_lutador1)
+            except Exception:
+
+
+
         lutador2 = input("Segundo Lutador: ")
         narradores = list(input('Narradores: '))
         data = self.le_letra(input('Data da Luta: '))
@@ -92,4 +98,10 @@ class TelaLuta:
                 valor_errado = float(valor_lido)
                 print('Você digitou um número, e não uma palavra')
             except ValueError:
-                return valor_lido
+                return
+
+    def verifica_lutador(self, id):
+        if self.__controlador_lutador.pega_lutador_por_id(id) == None:
+            raise Exception
+        else:
+            return self.__controlador_lutador.pega_lutador_por_id(id)
