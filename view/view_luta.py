@@ -22,8 +22,9 @@ class TelaLuta:
                 print('Insira um valor inteiro')
             try:
                 id_lutador1 = input("ID do primeiro Lutador: ")
-                lutador1 = verifica_lutador(id_lutador1)
+                lutador1 = self.verifica_lutador(id_lutador1)
             except Exception:
+                print("")
 
 
 
