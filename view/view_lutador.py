@@ -15,9 +15,9 @@ class TelaLutador:
         print("4 - Excluir Lutador")
         print("0 - Retornar")
 
-        opcao = self.le_num_inteiro("Escolha a opção:", [0,1,2,3,4])
+        opcao = self.le_num_inteiro("Escolha a opção:", [0, 1, 2, 3, 4])
         return opcao
-    
+
     def pega_dados_lutador(self):
         print("-------- DADOS LUTADOR ----------")
         nome = self.le_letra(input("Nome: "))
@@ -31,13 +31,13 @@ class TelaLutador:
             try:
                 id = int(input("ID: "))
             except:
-                print('Insira um valor inteiro')        
-        altura = self.le_num_real(input('Altura: '))
-        peso = self.le_num_real(input('Peso: '))
-        envergadura = self.le_num_real(input('Envergadura: '))
+                print('Insira um valor inteiro')
+        altura = self.le_num_real('Altura: ')
+        peso = self.le_num_real('Peso: ')
+        envergadura = self.le_num_real('Envergadura: ')
 
-        return {"nome": nome, "idade": idade, "id": id, "altura": altura, "peso": peso, "envergadura" : envergadura}
-    
+        return {"nome": nome, "idade": idade, "id": id, "altura": altura, "peso": peso, "envergadura": envergadura}
+
     def mostra_lutador(self, dados_lutador):
         print('NOME DO LUTADOR: ', dados_lutador['nome'])
         print('IDADE DO LUTADOR: ', dados_lutador['idade'])
@@ -46,7 +46,7 @@ class TelaLutador:
         print('PESO DO LUTADOR: ', dados_lutador['peso'])
         print('ENVERGADURA DO LUTADOR: ', dados_lutador['envergadura'])
         print()
-        
+
     def seleciona_lutador(self):
         while True:
             while True:
@@ -72,7 +72,7 @@ class TelaLutador:
     def controlador_lutador(self):
         return self.__controlador_lutador
 
-    def le_num_inteiro(self, mensagem=" ", ints_validos = None):
+    def le_num_inteiro(self, mensagem=" ", ints_validos=None):
         while True:
             valor_lido = input(mensagem)
             try:
@@ -84,7 +84,7 @@ class TelaLutador:
                 print("Valor incorreto!")
                 if ints_validos:
                     print("Valores válidos: ", ints_validos)
-    
+
     def le_num_real(self, mensagem=" "):
         while True:
             valor_lido = input(mensagem)
@@ -98,7 +98,9 @@ class TelaLutador:
         while True:
             valor_lido = input(mensagem)
             try:
-                valor_errado = float(valor_lido)
-                print('Você digitou um número, e não uma palavra')
+                if valor_lido.isalpha():
+                    return valor_lido
+                else:
+                    raise ValueError
             except ValueError:
-                return valor_lido
+                print('Digite uma palavra')
