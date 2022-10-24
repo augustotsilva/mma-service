@@ -70,8 +70,8 @@ class ControladorLutador:
         else:
             self.__tela_lutador.mostra_mensagem("ATENCAO: Lutador não existente")
 
-        def retornar(self):
-            self.__controlador_sistema.abre_tela()
+    def retornar(self):
+        self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_lutador, 2: self.lista_lutadores_por_peso, 3: self.lista_lutadores,

@@ -24,6 +24,7 @@ class TelaLutador:
         while True:
             try:
                 idade = int(input("Idade: "))
+                break
             except:
                 print('Insira um valor inteiro')
         while True:

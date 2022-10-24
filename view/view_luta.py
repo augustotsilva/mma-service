@@ -12,32 +12,65 @@ class TelaLuta:
         return opcao
 
     def pega_dados_luta(self):
-        # Falta exceções
+        # Falta a exceção dos Narradores
         print("-------- DADOS LUTA ----------")
         while True:
             try:
                 id = int(input("ID da Luta: "))
                 break
             except:
-                print('Insira um valor inteiro')
+                print('Digite um número inteiro')
+
+        while True:
+            while True:
+                try:
+                    id_lutador1 = int(input("ID do primeiro Lutador: "))
+                    break
+                except:
+                    print('Digite um número inteiro')
             try:
-                id_lutador1 = input("ID do primeiro Lutador: ")
                 lutador1 = self.verifica_lutador(id_lutador1)
+                break
             except Exception:
-                print("")
+                print('Esse Lutador não existe')
 
+        while True:
+            while True:
+                try:
+                    id_lutador2 = int(input("ID do primeiro Lutador: "))
+                    break
+                except:
+                    print('Digite um número inteiro')
+            try:
+                lutador2 = self.verifica_lutador(id_lutador2)
+                break
+            except Exception:
+                print('Esse Lutador não existe')
 
-
-        lutador2 = input("Segundo Lutador: ")
         narradores = list(input('Narradores: '))
+        
         data = self.le_letra(input('Data da Luta: '))
-        vencedor = input('Vencedor da Luta: ')
+
+        while True:
+            while True:
+                try:
+                    id_vencedor = int(input("ID do Lutador vencedor: "))
+                    break
+                except:
+                    print('Digite um número inteiro')
+            try:
+                vencedor = self.verifica_lutador(id_vencedor)
+                break
+            except Exception:
+                print('Esse Lutador não existe')
+
         while True:
             try:
-                card = int(input("Card: "))
+                card = int(input("Card da luta: "))
                 break
             except:
-                print('Insira um valor inteiro')
+                print('Digite um número inteiro')
+                
         local = self.le_letra(input('Local da Luta: '))
 
         return {"id": id, "lutador1": lutador1, 'lutador2': lutador2, "narradores": narradores, "data": data,
@@ -57,12 +90,11 @@ class TelaLuta:
     def seleciona_luta(self):
         while True:
             while True:
-                id = input('ID da Luta que deseja selecionar: ')
                 try:
-                    id_int = int(id)
+                    id = int(input('ID da Luta que deseja selecionar: '))
                     break
-                except ValueError:
-                    print('Você não está digitando um valor válido')
+                except:
+                    print('Digite um número inteiro')
             try:
                 id_valido = self.__controlador_luta.pega_luta_por_id(id_int)
                 if id_valido is None:
@@ -99,10 +131,11 @@ class TelaLuta:
                 valor_errado = float(valor_lido)
                 print('Você digitou um número, e não uma palavra')
             except ValueError:
-                return
+                return mensagem
 
     def verifica_lutador(self, id):
-        if self.__controlador_lutador.pega_lutador_por_id(id) == None:
+        if self.__controlador_lutador.pega_lutador_por_id(id) is None:
             raise Exception
         else:
             return self.__controlador_lutador.pega_lutador_por_id(id)
+
