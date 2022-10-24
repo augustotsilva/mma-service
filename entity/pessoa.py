@@ -4,8 +4,9 @@ from abc import ABC, abstractmethod
 class Pessoa(ABC):
     @abstractmethod
     def __init__(self, nome: str, idade: int):
-        self.__nome = nome
-        self.__idade = idade
+        if isinstance(nome, str) and isinstance(idade, int):
+            self.__nome = nome
+            self.__idade = idade
 
     @property
     def nome(self):
