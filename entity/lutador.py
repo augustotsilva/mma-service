@@ -3,10 +3,9 @@ from entity.pessoa import Pessoa
 
 class Lutador(Pessoa):
     def __init__(self, nome: str, idade: int, id: int, altura: float, peso: float, envergadura: float):
-        if isinstance(nome, str) and isinstance(idade, int) and isinstance(id, int) and isinstance(altura, float) and isinstance(peso, float) and\
+        super().__init__(nome, idade)
+        if isinstance(id, int) and isinstance(altura, float) and isinstance(peso, float) and\
            isinstance(envergadura, float):
-            self.__nome = nome
-            self.__idade = idade
             self.__id = id
             self.__altura = altura
             self.__peso = peso
