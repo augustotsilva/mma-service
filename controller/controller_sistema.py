@@ -9,7 +9,7 @@ class ControladorSistema:
         self.__tela_sistema = TelaSistema()
         self.__controlador_campeonato = ControladorCampeonato(self)
         # self.__controlador_luta = ControladorLuta()
-        self.__controlador_lutador = ControladorLutador()
+        self.__controlador_lutador = ControladorLutador(self)
         self.__controlador_narrador = ControladorNarrador(self)
 
     def cadastra_luta(self):
