@@ -27,6 +27,7 @@ class TelaCampeonato:
     def mostra_campeonato(self, dados_campeonato):
         # Tratar exceções
         if dados_campeonato is not None:
+            print("------------------------------------")
             print('ID DO CAMPEONATO: ', dados_campeonato['id'])
             print('NOME DO CAMPEONATO: ', dados_campeonato['nome'])
             print('DONO: ', dados_campeonato['dono'])
@@ -40,7 +41,6 @@ class TelaCampeonato:
         return id
 
     def mostra_mensagem(self, msg):
-        time.sleep(0.4)
         print(msg)
 
     def le_num_inteiro(self, mensagem=" ", ints_validos=None):

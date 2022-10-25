@@ -1,4 +1,3 @@
-from controller.controller_sistema import *
 from entity.campeonato import Campeonato
 from view.view_campeonato import *
 
@@ -18,16 +17,15 @@ class ControladorCampeonato:
         return None
 
     def lista_campeonatos(self):
-        if self.__campeonatos is not None:
-            self.__tela_campeonato.mostra_mensagem("--------------------------------------------------")
-
+        self.__tela_campeonato.mostra_mensagem("--------------------------------------------------")
+        if self.__campeonatos:
             for campeonato in self.__campeonatos:
                 self.__tela_campeonato.mostra_campeonato(
                     {'id': campeonato.id, 'nome': campeonato.nome, 'dono': campeonato.dono})
-
-            self.__tela_campeonato.mostra_mensagem("--------------------------------------------------")
         else:
             self.__tela_campeonato.mostra_mensagem("Não há campeonatos cadastrados")
+
+        self.__tela_campeonato.mostra_mensagem("--------------------------------------------------")
 
     def lista_campeonatos_por_dono(self, dono: str):
         # Tratar exceções
@@ -44,6 +42,7 @@ class ControladorCampeonato:
 
         campeonato = Campeonato(dados_campeonato["id"], dados_campeonato["nome"], dados_campeonato["dono"])
         self.__campeonatos.append(campeonato)
+        time.sleep(0.4)
         self.__tela_campeonato.mostra_mensagem("Campeonato inserido com sucesso")
 
     def excluir_campeonato(self):
@@ -58,7 +57,7 @@ class ControladorCampeonato:
             self.__tela_campeonato.mostra_mensagem("ATENÇÃO: Campeonato não existente")
 
     def retornar(self):
-        self.controlador_sistema.abre_tela()
+        self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
         # tratar exceções
