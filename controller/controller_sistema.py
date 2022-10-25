@@ -1,4 +1,5 @@
 from controller.controller_campeonato import *
+from controller.controller_lutador import *
 from view.view_sistema import *
 
 
@@ -7,7 +8,7 @@ class ControladorSistema:
         self.__tela_sistema = TelaSistema()
         self.__controlador_campeonato = ControladorCampeonato(self)
         # self.__controlador_luta = ControladorLuta()
-        # self.__controlador_lutador = ControladorLutador()
+        self.__controlador_lutador = ControladorLutador()
         # self.__controlador_narrador = ControladorNarrador()
 
     def cadastra_luta(self):

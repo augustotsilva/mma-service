@@ -4,7 +4,7 @@ from view.view_lutador import *
 class ControladorLutador:
     def __init__(self):
         self.__lutadores = []
-        self.__tela_lutador = TelaLutador(self)
+        self.__tela_lutador = TelaLutador()
 
     def pega_lutador_por_id(self, id: int):
         for lutador in self.__lutadores:

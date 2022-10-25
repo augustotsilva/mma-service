@@ -1,11 +1,4 @@
-from controller.controller_lutador import *
-
-
 class TelaLutador:
-    def __init__(self, controlador_lutador):
-        if isinstance(controlador_lutador, ControladorLutador):
-            self.__controlador_lutador = controlador_lutador
-
     def tela_opcoes(self):
         print("-------- LUTADORES ----------")
         print("Escolha a opção")
