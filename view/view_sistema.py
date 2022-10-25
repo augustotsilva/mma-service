@@ -1,5 +1,5 @@
 class TelaSistema:
-    def le_num_inteiro(self, mensagem=" ", ints_validos = None):
+    def le_num_inteiro(self, mensagem=" ", ints_validos=None):
         while True:
             valor_lido = input(mensagem)
             try:
@@ -20,6 +20,6 @@ class TelaSistema:
         print("3 - Narradores")
         print("4 - Campeonato")
         print("0 - Finalizar sistema")
-
-        opcao = self.le_num_inteiro("Escolha a opção:", [0,1,2,3,4])
+        print("--------------------------")
+        opcao = self.le_num_inteiro("Escolha a opção:", [0, 1, 2, 3, 4])
         return opcao
