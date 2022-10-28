@@ -30,7 +30,7 @@ class TelaLutador:
         peso = self.le_num_real('Peso: ')
         envergadura = self.le_num_real('Envergadura: ')
 
-        return {"nome": nome, "idade": idade, "id": id, "altura": altura, "peso": peso, "envergadura": envergadura}
+        return {'nome': nome, 'idade': idade, 'id': id, 'altura': altura, 'peso': peso, 'envergadura': envergadura}
 
     def mostra_lutador(self, dados_lutador):
         print('NOME DO LUTADOR: ', dados_lutador['nome'])
@@ -39,7 +39,7 @@ class TelaLutador:
         print('ALTURA DO LUTADOR: ', dados_lutador['altura'])
         print('PESO DO LUTADOR: ', dados_lutador['peso'])
         print('ENVERGADURA DO LUTADOR: ', dados_lutador['envergadura'])
-        print()
+        print("\n")
 
     def seleciona_lutador(self):
         while True:

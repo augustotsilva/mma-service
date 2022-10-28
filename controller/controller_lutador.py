@@ -1,5 +1,5 @@
-from view.view_lutador import *
-
+from view.view_lutador import TelaLutador
+from entity.lutador import Lutador
 
 class ControladorLutador:
     def __init__(self, controlador_sistema):
@@ -39,9 +39,7 @@ class ControladorLutador:
             self.__tela_lutador.mostra_mensagem('Lista de Lutadores está vazia')
         else:
             for lutador in self.__lutadores:
-                self.__tela_lutador.mostra_lutador(
-                    {'nome': lutador.nome, 'idade': lutador.idade, 'id': lutador.id, 'altura': lutador.altura,
-                     'peso': lutador.peso, 'envergadura': lutador.envergadura})
+                self.__tela_lutador.mostra_lutador({'nome': lutador.nome, 'idade': lutador.idade, 'id': lutador.id, 'altura': lutador.altura, 'peso': lutador.peso, 'envergadura': lutador.envergadura})
 
     def lista_lutadores_por_peso(self, peso: float):
         self.__tela_lutador.le_num_real(peso)
