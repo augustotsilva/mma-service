@@ -5,7 +5,7 @@ class ControladorLutador:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__lutadores = []
-        self.__tela_lutador = TelaLutador()
+        self.__tela_lutador = TelaLutador(self)
 
     def pega_lutador_por_id(self, id: int):
         for lutador in self.__lutadores:
@@ -19,6 +19,7 @@ class ControladorLutador:
         try:
             if lutador != None:
                 raise KeyError
+            lutador = Lutador(dados_lutador['nome'], dados_lutador['idade'], dados_lutador['id'], dados_lutador['altura'], dados_lutador['peso'], dados_lutador['envergadura'])
             self.__lutadores.append(lutador)
         except:
             self.__tela_lutadores.mostra_mensagem("Lutador já existente!")
@@ -28,7 +29,7 @@ class ControladorLutador:
         id_lutador = self.__tela_lutador.seleciona_lutador()
         lutador = self.pega_lutador_por_id(id_lutador)
 
-        if lutador is not None:
+        if (lutador is not None):
             self.__lutadores.remove(lutador)
             self.lista_lutadores()
         else:

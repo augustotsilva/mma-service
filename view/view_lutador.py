@@ -1,4 +1,7 @@
 class TelaLutador:
+    def __init__(self, controlador_lutador):
+        self.__controlador_lutador = controlador_lutador
+
     def tela_opcoes(self):
         print("-------- LUTADORES ----------")
         print("Escolha a opção")

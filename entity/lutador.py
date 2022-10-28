@@ -12,26 +12,8 @@ class Lutador(Pessoa):
             self.__envergadura = envergadura
 
     @property
-    def nome(self):
-        return self.__nome
-
-    @nome.setter
-    def nome(self, nome):
-        if isinstance(nome, str):
-            self.__nome = nome
-
-    @property
-    def idade(self):
-        return self.__idade
-
-    @idade.setter
-    def idade(self, idade):
-        if isinstance(idade, int):
-            self.__idade = idade
-
-    @property
     def id(self):
-        return self._id
+        return self.__id
 
     @id.setter
     def id(self, id):
