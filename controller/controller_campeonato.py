@@ -19,7 +19,7 @@ class ControladorCampeonato:
 
     def lista_campeonato_por_id(self):
         # Tratar a exceção
-        return self.lista_by_id(self.__tela_campeonato.)
+        return self.lista_by_id(self.__tela_campeonato)
 
     def lista_campeonatos(self):
         self.__tela_campeonato.mostra_mensagem("--------------------------------------------------")

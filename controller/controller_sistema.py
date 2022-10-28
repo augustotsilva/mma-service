@@ -2,13 +2,14 @@ from controller.controller_campeonato import ControladorCampeonato
 from controller.controller_lutador import ControladorLutador
 from controller.controller_narrador import ControladorNarrador
 from view.view_sistema import TelaSistema
+from controller.controller_luta import ControladorLuta
 
 
 class ControladorSistema:
     def __init__(self):
         self.__tela_sistema = TelaSistema()
         self.__controlador_campeonato = ControladorCampeonato(self)
-        # self.__controlador_luta = ControladorLuta()
+        self.__controlador_luta = ControladorLuta(self)
         self.__controlador_lutador = ControladorLutador(self)
         self.__controlador_narrador = ControladorNarrador(self)
 
