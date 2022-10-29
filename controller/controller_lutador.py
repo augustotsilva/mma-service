@@ -26,14 +26,10 @@ class ControladorLutador:
 
     def excluir_lutador(self):
         self.lista_lutadores()
-        id_lutador = self.__tela_lutador.seleciona_lutador()
-        lutador = self.pega_lutador_por_id(id_lutador)
-
-        if (lutador is not None):
+        lutador = self.__tela_lutador.seleciona_lutador()
+        if lutador is not None:
             self.__lutadores.remove(lutador)
-            self.lista_lutadores()
-        else:
-            self.__tela_lutador.mostra_mensagem("ATENÇÃO: Lutador não existente")
+            self.__tela_lutador.mostra_mensagem('Lutador excluido com sucesso!')
 
     def lista_lutadores(self):
         if len(self.__lutadores) == 0:
@@ -42,13 +38,13 @@ class ControladorLutador:
             for lutador in self.__lutadores:
                 self.__tela_lutador.mostra_lutador({'nome': lutador.nome, 'idade': lutador.idade, 'id': lutador.id, 'altura': lutador.altura, 'peso': lutador.peso, 'envergadura': lutador.envergadura})
 
-    def lista_lutadores_por_peso(self, peso: float):
-        self.__tela_lutador.le_num_real(peso)
+    def lista_lutadores_por_peso(self):
+        peso = self.__tela_lutador.pega_peso_lutador()
         if len(self.__lutadores) == 0:
             self.__tela_lutador.mostra_mensagem('Lista de Lutadores está vazia')
         else:
             for lutador in self.__lutadores:
-                if peso - 0.5 < lutador.peso < peso + 0.5:
+                if peso - 1 <= lutador.peso <= peso + 1:
                     self.__tela_lutador.mostra_lutador(
                         {'nome': lutador.nome, 'idade': lutador.idade, 'id': lutador.id, 'altura': lutador.altura,
                          'peso': lutador.peso, 'envergadura': lutador.envergadura})

@@ -1,10 +1,13 @@
-from view.view_luta import *
-
+from view.view_luta import TelaLuta
+from entity.luta import Luta
+from controller.controller_lutador import ControladorLutador
 
 class ControladorLuta:
-    def __init__(self):
+    def __init__(self, controlador_sistema):
         self.__lutas = []
-        self.__tela_luta = TelaLuta()
+        self.__tela_luta = TelaLuta(self)
+        self.__controlador_sistema = controlador_sistema
+        self.__controlador_lutador = ControladorLutador(self)
         
     def pega_luta_por_id(self, id: int):
         for luta in self.__lutas:
@@ -19,7 +22,8 @@ class ControladorLuta:
             for luta in self.__lutas:
                 self.__tela_luta.mostra_luta({'id': luta.id, 'lutador1': luta.lutador1, 'lutador2': luta.lutador2, 'narradores': luta.narradores, 'data': luta.data, 'vencedor': luta.vencedor, 'card': luta.card, 'local': luta.local})
             
-    def lista_lutas_por_categoria(self, categoria: float):
+    def lista_lutas_por_categoria(self):
+        categoria = self.__tela_luta.pega_categoria_luta()
         self.__tela_luta.le_num_real(categoria)
         if len(self.__lutas) == 0:
             self.__tela_luta.mostra_mensagem('Lista de Lutas está vazia')
@@ -34,20 +38,18 @@ class ControladorLuta:
         try:
             if luta != None:
                 raise KeyError
+            luta = Luta(dados_luta['id'], dados_luta['lutador1'], dados_luta['lutador2'], dados_luta['narradores'], dados_luta['data'], dados_luta['vencedor'], dados_luta['card'], dados_luta['local'])
             self.__lutas.append(luta)
         except:
             self.__tela_luta.mostra_mensagem("Luta já existente!")
     
     def excluir_luta(self):
         self.lista_lutas()
-        id_luta = self.__tela_luta.seleciona_luta()
-        luta = self.pega_luta_por_id(id_luta)
+        luta = self.__tela_luta.seleciona_luta()
         
         if luta is not None:
             self.__lutas.remove(luta)
-            self.lista_lutas()
-        else:
-            self.__tela_luta.mostra_mensagem("ATENÇÃO: Luta não existente")
+            self.__tela_luta.mostra_mensagem('Luta excluido com sucesso!')
     
     def alterar_luta(self):
         self.lista_lutas()
@@ -72,9 +74,12 @@ class ControladorLuta:
         self.__controlador_sistema.abre_tela()
         
     def abre_tela(self):
-        # tratar exceções
         lista_opcoes = {1: self.incluir_luta, 2: self.lista_lutas_por_categoria, 3: self.lista_lutas, 4: self.excluir_luta, 0: self.retornar}
         
         continua = True
         while continua:
             lista_opcoes[self.__tela_luta.tela_opcoes()]()
+            
+    @property
+    def controlador_lutador(self):
+        return self.__controlador_lutador

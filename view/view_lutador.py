@@ -46,21 +46,29 @@ class TelaLutador:
 
     def seleciona_lutador(self):
         while True:
-            while True:
-                id = input('ID do Lutador que deseja selecionar: ')
-                try:
-                    id_int = int(id)
-                    break
-                except ValueError:
-                    print('Você não está digitando um valor válido')
+            id = input('ID do Lutador que deseja selecionar: ')
             try:
-                id_valido = self.__controlador_lutador.pega_lutador_por_id(id_int)
-                if id_valido is None:
-                    raise Exception
-                else:
-                    return id_valido
-            except Exception:
-                print("Esse Lutador não existe")
+                id_int = int(id)
+                break
+            except:
+                print('Você não está digitando um valor válido')
+        try:
+            lutador = self.__controlador_lutador.pega_lutador_por_id(id_int)
+            if lutador is None:
+                raise Exception
+            else:
+                return lutador
+        except Exception:
+            print("Esse Lutador não existe")
+            return lutador
+    
+    def pega_peso_lutador(self):
+        while True:
+            try:
+                peso = float(input('Faixa de peso que deseja selecionar: '))
+                return peso
+            except ValueError:
+                print('Insira um valor numérico ')
 
     def mostra_mensagem(self, msg):
         print(msg)
