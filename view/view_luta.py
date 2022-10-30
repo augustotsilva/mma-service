@@ -30,7 +30,6 @@ class TelaLuta:
                 break
             except:
                 print('Digite um número inteiro')
-        lutador1 = self.verifica_lutador(id_lutador1)
 
         while True:
             try:
@@ -38,19 +37,25 @@ class TelaLuta:
                 break
             except:
                 print('Digite um número inteiro')
-        lutador2 = self.verifica_lutador(id_lutador2)
 
         #narradores = list(input('Narradores: '))
 
-        data = self.le_letra('Data da Luta: ')
+        data = input('Data da Luta: ')
 
         while True:
+            while True:
+                try:
+                    id_vencedor = int(input("ID do Lutador vencedor: "))
+                    break
+                except:
+                    print('Digite um número inteiro')
             try:
-                id_vencedor = int(input("ID do Lutador vencedor: "))
-                break
-            except:
-                print('Digite um número inteiro')
-        vencedor = self.verifica_lutador(id_vencedor)
+                if id_vencedor != id_lutador1 and id_vencedor != id_lutador2:
+                    raise Exception
+                else:
+                    break
+            except Exception:
+                print('O ID do vencedor da Luta precisa ser um dos IDs dos Lutadores cadatrados!')
 
         while True:
             try:
@@ -61,17 +66,14 @@ class TelaLuta:
 
         local = self.le_letra('Local da Luta: ')
 
-        #return {"id": id, "lutador1": lutador1, 'lutador2': lutador2, "narradores": narradores, "data": data,
-        #        "vencedor": vencedor, "card": card, 'local': local}
+        return {'id': id, 'id_lutador1': id_lutador1, 'id_lutador2': id_lutador2, "data": data,
+                "id_vencedor": id_vencedor, "card": card, 'local': local}
 
-        return {"id": id, "lutador1": lutador1, 'lutador2': lutador2, "data": data,
-                "vencedor": vencedor, "card": card, 'local': local}
-        
     def mostra_luta(self, dados_luta):
         print('ID DA LUTA: ', dados_luta['id'])
         print('PRIMEIRO LUTADOR DA LUTA: ', dados_luta['lutador1'])
         print('SEGUNDO LUTADOR DA LUTA: ', dados_luta['lutador2'])
-        print('NARRADORES DA LUTA: ', dados_luta['narradores'])
+        #print('NARRADORES DA LUTA: ', dados_luta['narradores'])
         print('DATA DA LUTA: ', dados_luta['data'])
         print('VENCEDOR DA LUTA: ', dados_luta['vencedor'])
         print('CARD DA LUTA: ', dados_luta['card'])
@@ -132,7 +134,7 @@ class TelaLuta:
                 print('Digite uma palavra')
 
     def verifica_lutador(self, id):
-        lutador = self.__controlador_luta.controlador_lutador.pega_lutador_por_id(id)
+        lutador = self.__controlador_luta.verifica_lutador(id)
         if lutador is None:
             print('Esse Lutador não existe')
             return lutador

@@ -3,13 +3,13 @@ from entity.narrador import Narrador
 
 
 class Luta:
-    def __init__(self, id: int, lutador1: Lutador, lutador2: Lutador, narradores: Narrador, data: str, vencedor: Lutador, card: int, local: int):
-        if isinstance(id, int) and isinstance(lutador1, Lutador) and isinstance(lutador2, Lutador) and isinstance(narradores, Narrador) and \
+    def __init__(self, id: int, lutador1: Lutador, lutador2: Lutador, data: str, vencedor: Lutador, card: int, local: int):
+        if isinstance(id, int) and isinstance(lutador1, Lutador) and isinstance(lutador2, Lutador) and \
            isinstance(data, str) and isinstance(vencedor, Lutador) and isinstance(card, int) and isinstance(local, str):
             self.__id = id
             self.__lutador1 = lutador1
             self.__lutador2 = lutador2
-            self.__narradores = narradores
+            #self.__narradores = narradores
             self.__data = data
             self.__vencedor = vencedor
             self.__card = card

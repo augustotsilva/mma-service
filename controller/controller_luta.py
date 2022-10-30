@@ -20,7 +20,7 @@ class ControladorLuta:
             self.__tela_luta.mostra_mensagem('Lista de Lutas está vazia')
         else:
             for luta in self.__lutas:
-                self.__tela_luta.mostra_luta({'id': luta.id, 'lutador1': luta.lutador1, 'lutador2': luta.lutador2, 'narradores': luta.narradores, 'data': luta.data, 'vencedor': luta.vencedor, 'card': luta.card, 'local': luta.local})
+                self.__tela_luta.mostra_luta({'id': luta.id, 'lutador1': luta.lutador1.nome, 'lutador2': luta.lutador2.nome, 'data': luta.data, 'vencedor': luta.vencedor.nome, 'card': luta.card, 'local': luta.local})
             
     def lista_lutas_por_categoria(self):
         categoria = self.__tela_luta.pega_categoria_luta()
@@ -32,16 +32,18 @@ class ControladorLuta:
                 if categoria - 0.5 < luta.lutador1.peso and luta.lutador2.peso < categoria + 0.5:
                     self.__tela_luta.mostra_luta({'id': luta.id, 'lutador1': luta.lutador1, 'lutador2': luta.lutador2, 'narradores': luta.narradores, 'data': luta.data, 'vencedor': luta.vencedor, 'card': luta.card, 'local': luta.local})
     
+    '''
     def incluir_luta(self):
         dados_luta = self.__tela_luta.pega_dados_luta()
         luta = self.pega_luta_por_id(dados_luta['id'])
         try:
             if luta != None:
                 raise KeyError
-            luta = Luta(dados_luta['id'], dados_luta['lutador1'], dados_luta['lutador2'], dados_luta['narradores'], dados_luta['data'], dados_luta['vencedor'], dados_luta['card'], dados_luta['local'])
+            luta = Luta(dados_luta['id'], dados_luta['lutador1'], dados_luta['lutador2'], dados_luta['data'], dados_luta['vencedor'], dados_luta['card'], dados_luta['local'])
             self.__lutas.append(luta)
         except:
             self.__tela_luta.mostra_mensagem("Luta já existente!")
+    '''
     
     def excluir_luta(self):
         self.lista_lutas()
@@ -79,7 +81,41 @@ class ControladorLuta:
         continua = True
         while continua:
             lista_opcoes[self.__tela_luta.tela_opcoes()]()
-            
-    @property
-    def controlador_lutador(self):
-        return self.__controlador_lutador
+    
+    def verifica_lutador(self, id):
+        lutador = self.__controlador_lutador.pega_lutador_por_id(id)
+        return lutador
+    
+    def incluir_luta(self):
+        dados_luta = self.__tela_luta.pega_dados_luta()
+
+        try:
+            lutador1 = self.__controlador_sistema.controlador_lutador.pega_lutador_por_id(dados_luta["id_lutador1"])
+            if lutador1 is None:
+                raise Exception
+        except Exception:
+            return self.__tela_luta.mostra_mensagem('Nenhum Lutador possui o ID que você colocou na opção de primeiro Lutador')
+
+        try:
+            lutador2 = self.__controlador_sistema.controlador_lutador.pega_lutador_por_id(dados_luta["id_lutador2"])
+            if lutador2 is None:
+                raise Exception
+        except Exception:
+            return self.__tela_luta.mostra_mensagem('Nenhum Lutador possui o ID que você colocou na opção de segundo Lutador')
+                
+
+        try:
+            vencedor = self.__controlador_sistema.controlador_lutador.pega_lutador_por_id(dados_luta["id_vencedor"])
+            if vencedor is None:
+                raise Exception
+        except Exception:
+            return self.__tela_luta.mostra_mensagem('Nenhum Lutador possui esse ID')
+                
+        id = dados_luta['id']
+        data = dados_luta['data']
+        card = dados_luta['card']
+        local = dados_luta['local']
+        
+        luta = Luta(id, lutador1, lutador2, data, vencedor, card, local)
+        self.__lutas.append(luta)
+        return self.__tela_luta.mostra_mensagem('Luta incluida com sucesso!')

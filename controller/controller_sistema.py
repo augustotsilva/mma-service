@@ -39,3 +39,11 @@ class ControladorSistema:
             opcao_escolhida = self.__tela_sistema.tela_opcoes()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
+
+    @property
+    def controlador_lutador(self):
+        return self.__controlador_lutador
+
+    @property
+    def controlador_luta(self):
+        return self.__controlador_luta
