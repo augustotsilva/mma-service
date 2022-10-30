@@ -37,6 +37,7 @@ class TelaLutador:
         return {'nome': nome, 'idade': idade, 'id': id, 'altura': altura, 'peso': peso, 'envergadura': envergadura}
 
     def mostra_lutador(self, dados_lutador):
+        print("\n")
         print('NOME DO LUTADOR: ', dados_lutador['nome'])
         print('IDADE DO LUTADOR: ', dados_lutador['idade'])
         print('ID DO LUTADOR: ', dados_lutador['id'])

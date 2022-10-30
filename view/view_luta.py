@@ -136,5 +136,4 @@ class TelaLuta:
         if lutador is None:
             print('Esse Lutador não existe')
             return lutador
-        else:
-            return lutador
+        return lutador

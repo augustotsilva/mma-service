@@ -22,18 +22,18 @@ class ControladorLutador:
             lutador = Lutador(dados_lutador['nome'], dados_lutador['idade'], dados_lutador['id'], dados_lutador['altura'], dados_lutador['peso'], dados_lutador['envergadura'])
             self.__lutadores.append(lutador)
         except:
-            self.__tela_lutadores.mostra_mensagem("Lutador já existente!")
+            self.__tela_lutadores.mostra_mensagem("\nLutador já existente!\n")
 
     def excluir_lutador(self):
         self.lista_lutadores()
         lutador = self.__tela_lutador.seleciona_lutador()
         if lutador is not None:
             self.__lutadores.remove(lutador)
-            self.__tela_lutador.mostra_mensagem('Lutador excluido com sucesso!')
+            self.__tela_lutador.mostra_mensagem('\nLutador excluido com sucesso!\n')
 
     def lista_lutadores(self):
         if len(self.__lutadores) == 0:
-            self.__tela_lutador.mostra_mensagem('Lista de Lutadores está vazia')
+            self.__tela_lutador.mostra_mensagem('\nLista de Lutadores está vazia\n')
         else:
             for lutador in self.__lutadores:
                 self.__tela_lutador.mostra_lutador({'nome': lutador.nome, 'idade': lutador.idade, 'id': lutador.id, 'altura': lutador.altura, 'peso': lutador.peso, 'envergadura': lutador.envergadura})
@@ -41,13 +41,18 @@ class ControladorLutador:
     def lista_lutadores_por_peso(self):
         peso = self.__tela_lutador.pega_peso_lutador()
         if len(self.__lutadores) == 0:
-            self.__tela_lutador.mostra_mensagem('Lista de Lutadores está vazia')
+            self.__tela_lutador.mostra_mensagem('\nLista de Lutadores está vazia\n')
         else:
             for lutador in self.__lutadores:
-                if peso - 1 <= lutador.peso <= peso + 1:
-                    self.__tela_lutador.mostra_lutador(
-                        {'nome': lutador.nome, 'idade': lutador.idade, 'id': lutador.id, 'altura': lutador.altura,
-                         'peso': lutador.peso, 'envergadura': lutador.envergadura})
+                try:
+                    if peso - 1 <= lutador.peso <= peso + 1:
+                        self.__tela_lutador.mostra_lutador(
+                            {'nome': lutador.nome, 'idade': lutador.idade, 'id': lutador.id, 'altura': lutador.altura,
+                            'peso': lutador.peso, 'envergadura': lutador.envergadura})
+                    else:
+                        raise Exception
+                except Exception:
+                    self.__tela_lutador.mostra_mensagem('\nNão há nenhum Lutador nessa faixa de peso!\n')
 
     def alterar_lutador(self):
         self.lista_lutadores()
@@ -63,7 +68,7 @@ class ControladorLutador:
             lutador.envergadura = novos_dados_lutador["envergadura"]
             self.lista_lutadores()
         else:
-            self.__tela_lutador.mostra_mensagem("ATENCAO: Lutador não existente")
+            self.__tela_lutador.mostra_mensagem("\nATENCAO: Lutador não existente\n")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
