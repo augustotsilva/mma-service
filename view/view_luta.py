@@ -34,7 +34,7 @@ class TelaLuta:
 
         while True:
             try:
-                id_lutador2 = int(input("ID do primeiro Lutador: "))
+                id_lutador2 = int(input("ID do segundo Lutador: "))
                 break
             except:
                 print('Digite um número inteiro')
@@ -64,7 +64,7 @@ class TelaLuta:
         #return {"id": id, "lutador1": lutador1, 'lutador2': lutador2, "narradores": narradores, "data": data,
         #        "vencedor": vencedor, "card": card, 'local': local}
 
-        return {"id": id, "lutador1": lutador1, 'lutador2': lutador2, "narradores": narradores, "data": data,
+        return {"id": id, "lutador1": lutador1, 'lutador2': lutador2, "data": data,
                 "vencedor": vencedor, "card": card, 'local': local}
         
     def mostra_luta(self, dados_luta):
@@ -107,10 +107,6 @@ class TelaLuta:
     def mostra_mensagem(self, msg):
         print(msg)
 
-    @property
-    def controlador_luta(self):
-        return self.__controlador_luta
-
     def le_num_inteiro(self, mensagem=" ", ints_validos=None):
         while True:
             valor_lido = input(mensagem)
@@ -136,7 +132,9 @@ class TelaLuta:
                 print('Digite uma palavra')
 
     def verifica_lutador(self, id):
-        if self.__controlador_luta.controlador_lutador.pega_lutador_por_id(id) is None:
+        lutador = self.__controlador_luta.controlador_lutador.pega_lutador_por_id(id)
+        if lutador is None:
             print('Esse Lutador não existe')
+            return lutador
         else:
-            return self.__controlador_luta.controlador_lutador.pega_lutador_por_id(id)
+            return lutador

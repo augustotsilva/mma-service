@@ -8,10 +8,11 @@ class TelaLutador:
         print("1 - Incluir Lutador")
         print("2 - Listar Lutadores por Peso")
         print("3 - Listar Todos Lutadores")
-        print("4 - Excluir Lutador")
+        print("4 - Alterar Lutadores")
+        print("5 - Excluir Lutador")
         print("0 - Retornar")
 
-        opcao = self.le_num_inteiro("Escolha a opção:", [0, 1, 2, 3, 4])
+        opcao = self.le_num_inteiro("Escolha a opção:", [0, 1, 2, 3, 4, 5])
         return opcao
 
     def pega_dados_lutador(self):
@@ -72,10 +73,6 @@ class TelaLutador:
 
     def mostra_mensagem(self, msg):
         print(msg)
-
-    @property
-    def controlador_lutador(self):
-        return self.__controlador_lutador
 
     def le_num_inteiro(self, mensagem=" ", ints_validos=None):
         while True:

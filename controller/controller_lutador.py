@@ -51,8 +51,7 @@ class ControladorLutador:
 
     def alterar_lutador(self):
         self.lista_lutadores()
-        id_lutador = self.__tela_lutador.seleciona_lutador()
-        lutador = self.pega_lutador_por_id(id_lutador)
+        lutador = self.__tela_lutador.seleciona_lutador()
 
         if lutador is not None:
             novos_dados_lutador = self.__tela_lutador.pega_dados_lutador()
@@ -70,8 +69,8 @@ class ControladorLutador:
         self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
-        lista_opcoes = {1: self.incluir_lutador, 2: self.lista_lutadores_por_peso, 3: self.lista_lutadores,
-                        4: self.excluir_lutador, 0: self.retornar}
+        lista_opcoes = {1: self.incluir_lutador, 2: self.lista_lutadores_por_peso, 3: self.lista_lutadores, 4: self.alterar_lutador,
+                        5: self.excluir_lutador, 0: self.retornar}
 
         continua = True
         while continua:
