@@ -8,10 +8,11 @@ class TelaLuta:
         print("1 - Incluir Luta")
         print("2 - Listar Lutas por Categoria")
         print("3 - Listar Todas as Lutas")
-        print("4 - Excluir Luta")
+        print('4 - Alterar Luta')
+        print("5 - Excluir Luta")
         print("0 - Retornar")
 
-        opcao = self.le_num_inteiro("Escolha a opção:", [0, 1, 2, 3, 4])
+        opcao = self.le_num_inteiro("Escolha a opção:", [0, 1, 2, 3, 4, 5])
         return opcao
 
     def pega_dados_luta(self):
@@ -70,6 +71,7 @@ class TelaLuta:
                 "id_vencedor": id_vencedor, "card": card, 'local': local}
 
     def mostra_luta(self, dados_luta):
+        print()
         print('ID DA LUTA: ', dados_luta['id'])
         print('PRIMEIRO LUTADOR DA LUTA: ', dados_luta['lutador1'])
         print('SEGUNDO LUTADOR DA LUTA: ', dados_luta['lutador2'])
@@ -78,7 +80,7 @@ class TelaLuta:
         print('VENCEDOR DA LUTA: ', dados_luta['vencedor'])
         print('CARD DA LUTA: ', dados_luta['card'])
         print('LOCAL DA LUTA: ', dados_luta['local'])
-        print()
+        print("\n")
 
     def pega_categoria_luta(self):
         # Falta coisa
@@ -132,10 +134,3 @@ class TelaLuta:
                     raise ValueError
             except ValueError:
                 print('Digite uma palavra')
-
-    def verifica_lutador(self, id):
-        lutador = self.__controlador_luta.verifica_lutador(id)
-        if lutador is None:
-            print('Esse Lutador não existe')
-            return lutador
-        return lutador

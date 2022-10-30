@@ -67,8 +67,6 @@ class ControladorLutador:
             lutador.peso = novos_dados_lutador["peso"]
             lutador.envergadura = novos_dados_lutador["envergadura"]
             self.lista_lutadores()
-        else:
-            self.__tela_lutador.mostra_mensagem("\nATENCAO: Lutador não existente\n")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
