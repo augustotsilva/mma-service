@@ -44,38 +44,46 @@ class ControladorCampeonato:
 
     def incluir_campeonato(self):
         dados_campeonato = self.__tela_campeonato.pega_dados_campeonato()
-        if self.lista_por_id(dados_campeonato['id']) is not None:
-            self.__tela_campeonato.mostra_mensagem("ATENÇÃO: Campeonato não existente")
-        else:
+        try:
+            if self.lista_por_id(dados_campeonato['id']) is not None:
+                raise ValueError
             campeonato = Campeonato(dados_campeonato["id"], dados_campeonato["nome"], dados_campeonato["dono"])
             self.__campeonatos.append(campeonato)
             self.__tela_campeonato.mostra_mensagem("Campeonato inserido com sucesso")
+        except ValueError:
+            self.__tela_campeonato.mostra_mensagem("ATENÇÃO: Campeonato não existente")
 
     def alterar_campeonato(self):
-        self.lista_campeonatos()
-        if self.__campeonatos:
-            id_campeonato = self.__tela_campeonato.seleciona_campeonato()
-            campeonato = self.lista_por_id(id_campeonato)
-            if campeonato is not None:
-                novos_dados_campeonato = self.__tela_campeonato.pega_dados_campeonato()
-                campeonato.id = novos_dados_campeonato["id"]
-                campeonato.nome = novos_dados_campeonato["nome"]
-                campeonato.dono = novos_dados_campeonato["dono"]
-                self.lista_campeonatos()
-                self.__tela_campeonato.mostra_mensagem("Campeonato alterado com sucesso")
-            else:
-                self.__tela_campeonato.mostra_mensagem("ATENÇÃO: Campeonato não existente")
+        try:
+            self.lista_campeonatos()
+            if self.__campeonatos:
+                id_campeonato = self.__tela_campeonato.seleciona_campeonato()
+                campeonato = self.lista_por_id(id_campeonato)
+                if campeonato is not None:
+                    novos_dados_campeonato = self.__tela_campeonato.pega_dados_campeonato()
+                    campeonato.id = novos_dados_campeonato["id"]
+                    campeonato.nome = novos_dados_campeonato["nome"]
+                    campeonato.dono = novos_dados_campeonato["dono"]
+                    self.lista_campeonatos()
+                    self.__tela_campeonato.mostra_mensagem("Campeonato alterado com sucesso")
+                else:
+                    raise ValueError
+        except ValueError:
+            self.__tela_campeonato.mostra_mensagem("ATENÇÃO: Campeonato não existente")
 
     def excluir_campeonato(self):
-        self.lista_campeonatos()
-        if self.__campeonatos:
-            id_campeonato = self.__tela_campeonato.seleciona_campeonato()
-            campeonato = self.lista_por_id(id_campeonato)
-            if campeonato is not None:
-                self.__campeonatos.remove(campeonato)
-                self.__tela_campeonato.mostra_mensagem("Campeonato excluído com sucesso")
-            else:
-                self.__tela_campeonato.mostra_mensagem("ATENÇÃO: Campeonato não existente")
+        try:
+            self.lista_campeonatos()
+            if self.__campeonatos:
+                id_campeonato = self.__tela_campeonato.seleciona_campeonato()
+                campeonato = self.lista_por_id(id_campeonato)
+                if campeonato is not None:
+                    self.__campeonatos.remove(campeonato)
+                    self.__tela_campeonato.mostra_mensagem("Campeonato excluído com sucesso")
+                else:
+                    raise ValueError
+        except ValueError:
+            self.__tela_campeonato.mostra_mensagem("ATENÇÃO: Campeonato não existente")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
