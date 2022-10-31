@@ -18,13 +18,14 @@ class TelaLutador:
     def pega_dados_lutador(self):
         print("-------- DADOS LUTADOR ----------")
         while True:
-            nome_p = input("Nome: ")
+            nome_e = input('Nome: ')
             try:
-                nome = int(nome_p)
-                print('\nInsira um nome!\n')
+                nome = int(nome_e)
+                print('\nDigite um nome!\n')
             except:
+                nome = nome_e
                 break
-
+            
         while True:
             try:
                 idade = int(input("Idade: "))
@@ -36,7 +37,7 @@ class TelaLutador:
                 id = int(input("ID: "))
                 break
             except:
-                print('Insira um valor inteiro')
+                print('\nInsira um valor inteiro\n')
         altura = self.le_num_real('Altura: ')
         peso = self.le_num_real('Peso: ')
         envergadura = self.le_num_real('Envergadura: ')
