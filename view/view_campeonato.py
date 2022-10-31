@@ -40,6 +40,11 @@ class TelaCampeonato:
         id = self.le_num_inteiro('ID do campeonato que deseja selecionar: ')
         return id
 
+    def seleciona_luta(self):
+        # Tratar as exceções
+        id = self.le_num_inteiro('ID da luta que deseja selecionar ao campeonato: ')
+        return id
+
     def seleciona_dono(self):
         # Tratar as exceções
         dono = self.le_string('Nome do dono que deseja selecionar: ')
