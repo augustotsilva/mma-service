@@ -11,7 +11,7 @@ class TelaNarrador:
         print("0 - Retornar")
         print("-------------------------------")
 
-        opcao = int(input("Escolha a opção: "))
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0, 1, 2, 3, 4, 5])
         return opcao
 
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
@@ -19,7 +19,7 @@ class TelaNarrador:
         print("-------- DADOS NARRADOR ----------")
         id = self.le_num_inteiro("ID: ")
         nome = self.le_string("Nome: ")
-        idade = self.le_string("Idade: ")
+        idade = self.le_num_inteiro("Idade: ")
         temperamento = self.le_string("Temperamento: ")
         print("------------------------------------")
         return {"id": id, "nome": nome, "idade": idade, "temperamento": temperamento}
@@ -46,7 +46,8 @@ class TelaNarrador:
         print(msg)
         print("--------------------------------------------------")
 
-    def le_num_inteiro(self, mensagem=" ", ints_validos=None):
+    @staticmethod
+    def le_num_inteiro(mensagem=" ", ints_validos=None):
         while True:
             valor_lido = input(mensagem)
             try:
@@ -59,7 +60,8 @@ class TelaNarrador:
                 if ints_validos:
                     print("Valores válidos: ", ints_validos)
 
-    def le_string(self, mensagem=" "):
+    @staticmethod
+    def le_string(mensagem=" "):
         while True:
             valor_lido = input(mensagem)
             try:

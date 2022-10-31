@@ -22,8 +22,7 @@ class ControladorNarrador:
     def lista_narradores(self):
         if self.__narradores:
             for narrador in self.__narradores:
-                self.__tela_narrador.mostra_narrador(
-                    {'id': narrador.id, 'nome': narrador.nome, 'dono': narrador.dono})
+                self.__tela_narrador.mostra_narrador(self.convert_to_view_object(narrador))
         else:
             self.__tela_narrador.mostra_mensagem("Não há narradores cadastrados")
 

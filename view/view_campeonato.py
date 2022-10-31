@@ -50,7 +50,8 @@ class TelaCampeonato:
         print(msg)
         print("--------------------------------------------------")
 
-    def le_num_inteiro(self, mensagem=" ", ints_validos=None):
+    @staticmethod
+    def le_num_inteiro(mensagem=" ", ints_validos=None):
         while True:
             valor_lido = input(mensagem)
             try:
@@ -63,7 +64,8 @@ class TelaCampeonato:
                 if ints_validos:
                     print("Valores válidos: ", ints_validos)
 
-    def le_string(self, mensagem=" "):
+    @staticmethod
+    def le_string(mensagem=" "):
         while True:
             valor_lido = input(mensagem)
             try:
