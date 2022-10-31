@@ -15,7 +15,7 @@ class ControladorLuta:
 
     def lista_lutas(self):
         if len(self.__lutas) == 0:
-            self.__tela_luta.mostra_mensagem('Lista de Lutas está vazia')
+            self.__tela_luta.mostra_mensagem('\nLista de Lutas está vazia\n')
         else:
             for luta in self.__lutas:
                 self.__tela_luta.mostra_luta({'id': luta.id, 'lutador1': luta.lutador1.nome, 'lutador2': luta.lutador2.nome, 'data': luta.data, 'vencedor': luta.vencedor.nome, 'card': luta.card, 'local': luta.local})
@@ -27,24 +27,24 @@ class ControladorLuta:
             if lutador1 is None:
                 raise Exception
         except Exception:
-            return self.__tela_luta.mostra_mensagem('Nenhum Lutador possui o ID que você colocou na opção de primeiro Lutador')
+            return self.__tela_luta.mostra_mensagem('\nNenhum Lutador possui o ID que você colocou na opção de primeiro Lutador\n')
 
         try:
             lutador2 = self.__controlador_sistema.controlador_lutador.pega_lutador_por_id(dados_luta["id_lutador2"])
             if lutador2 is None:
                 raise Exception
         except Exception:
-            return self.__tela_luta.mostra_mensagem('Nenhum Lutador possui o ID que você colocou na opção de segundo Lutador')
+            return self.__tela_luta.mostra_mensagem('\nNenhum Lutador possui o ID que você colocou na opção de segundo Lutador\n')
 
         if lutador1.id == lutador2.id:
-            return self.__tela_luta.mostra_mensagem('Impossível fazer a luta com os mesmos lutadores!')
+            return self.__tela_luta.mostra_mensagem('\nImpossível fazer a luta com os mesmos lutadores!\n')
 
         try:
             vencedor = self.__controlador_sistema.controlador_lutador.pega_lutador_por_id(dados_luta["id_vencedor"])
             if vencedor is None:
                 raise Exception
         except Exception:
-            return self.__tela_luta.mostra_mensagem('Nenhum Lutador possui esse ID')
+            return self.__tela_luta.mostra_mensagem('\nNenhum Lutador possui esse ID\n')
                 
         id = dados_luta['id']
         data = dados_luta['data']
@@ -53,13 +53,13 @@ class ControladorLuta:
         
         luta = Luta(id, lutador1, lutador2, data, vencedor, card, local)
         self.__lutas.append(luta)
-        return self.__tela_luta.mostra_mensagem('Luta incluida com sucesso!')
+        return self.__tela_luta.mostra_mensagem('\nLuta incluida com sucesso!\n')
     
     def excluir_luta(self):
         if len(self.__lutas) != 0:
             self.lista_lutas()
         else:
-            return self.__tela_luta.mostra_mensagem('Não é possível exluir uma Luta pois não existe nenhuma')
+            return self.__tela_luta.mostra_mensagem('\nNão é possível exluir uma Luta pois não existe nenhuma\n')
         
         luta = self.__tela_luta.seleciona_luta()
         
@@ -71,7 +71,7 @@ class ControladorLuta:
         if len(self.__lutas) != 0:
             self.lista_lutas()
         else:
-            return self.__tela_luta.mostra_mensagem('Não é possível alterar uma Luta pois não existe nenhuma')
+            return self.__tela_luta.mostra_mensagem('\nNão é possível alterar uma Luta pois não existe nenhuma\n')
         
         luta = self.__tela_luta.seleciona_luta()
 
@@ -83,21 +83,24 @@ class ControladorLuta:
                 if lutador1 is None:
                     raise Exception
             except Exception:
-                return self.__tela_luta.mostra_mensagem('Nenhum Lutador possui o ID que você colocou na opção de primeiro Lutador')
+                return self.__tela_luta.mostra_mensagem('\nNenhum Lutador possui o ID que você colocou na opção de primeiro Lutador\n')
 
             try:
                 lutador2 = self.__controlador_sistema.controlador_lutador.pega_lutador_por_id(novos_dados_luta["id_lutador2"])
                 if lutador2 is None:
                     raise Exception
             except Exception:
-                return self.__tela_luta.mostra_mensagem('Nenhum Lutador possui o ID que você colocou na opção de segundo Lutador')
-                    
+                return self.__tela_luta.mostra_mensagem('\nNenhum Lutador possui o ID que você colocou na opção de segundo Lutador\n')
+            
+            if lutador1.id == lutador2.id:
+                return self.__tela_luta.mostra_mensagem('\nImpossível fazer a luta com os mesmos lutadores!\n')
+            
             try:
                 vencedor = self.__controlador_sistema.controlador_lutador.pega_lutador_por_id(novos_dados_luta["id_vencedor"])
                 if vencedor is None:
                     raise Exception
             except Exception:
-                return self.__tela_luta.mostra_mensagem('Nenhum Lutador possui esse ID')
+                return self.__tela_luta.mostra_mensagem('\nNenhum Lutador possui esse ID\n')
   
             luta.id = novos_dados_luta["id"]
             luta.lutador1 = lutador1
