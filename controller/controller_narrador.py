@@ -9,50 +9,45 @@ class ControladorNarrador:
         self.__narradores = []
 
     def lista_por_id(self, id: int = None):
-        for campeonato in self.__narradores:
-            if campeonato.id == id:
-                return campeonato
-
-    def lista_por_dono(self, dono: str = None):
-        campeonatos = []
-        for campeonato in self.__narradores:
-            if dono.upper() == campeonato.dono.upper():
-                campeonatos.append(campeonato)
-        return campeonatos
+        for narrador in self.__narradores:
+            if narrador.id == id:
+                return narrador
 
     def lista_narrador_por_id(self):
         if not self.__narradores:
             return self.__tela_narrador.mostra_mensagem("Não há narradores registrados")
-        campeonato = self.lista_por_id(self.__tela_narrador.seleciona_narrador())
-        return self.__tela_narrador.mostra_narrador(self.convert_to_view_object(campeonato))
+        narrador = self.lista_por_id(self.__tela_narrador.seleciona_narrador())
+        return self.__tela_narrador.mostra_narrador(self.convert_to_view_object(narrador))
 
     def lista_narradores(self):
         if self.__narradores:
-            for campeonato in self.__narradores:
+            for narrador in self.__narradores:
                 self.__tela_narrador.mostra_narrador(
-                    {'id': campeonato.id, 'nome': campeonato.nome, 'dono': campeonato.dono})
+                    {'id': narrador.id, 'nome': narrador.nome, 'dono': narrador.dono})
         else:
             self.__tela_narrador.mostra_mensagem("Não há narradores cadastrados")
 
     def incluir_narrador(self):
-        dados_narrador = self.__tela_narrador.pega_dados_narradores()
+        dados_narrador = self.__tela_narrador.pega_dados_narrador()
         if self.lista_por_id(dados_narrador['id']) is not None:
             self.__tela_narrador.mostra_mensagem("ATENÇÃO: Narrador não existente")
         else:
-            campeonato = Narrador(dados_narrador["id"], dados_narrador["nome"], dados_narrador["dono"])
-            self.__narradores.append(campeonato)
+            narrador = Narrador(dados_narrador["id"], dados_narrador["nome"], dados_narrador["idade"],
+                                dados_narrador["temperamento"])
+            self.__narradores.append(narrador)
             self.__tela_narrador.mostra_mensagem("Narrador inserido com sucesso")
 
-    def alterar_campeonato(self):
+    def alterar_narrador(self):
         self.lista_narradores()
         if self.__narradores:
-            id_campeonato = self.__tela_narrador.seleciona_narrador()
-            narrador = self.lista_por_id(id_campeonato)
+            id_narrador = self.__tela_narrador.seleciona_narrador()
+            narrador = self.lista_por_id(id_narrador)
             if narrador is not None:
-                novos_dados_narrador = self.__tela_narrador.pega_dados_narradores()
+                novos_dados_narrador = self.__tela_narrador.pega_dados_narrador()
                 narrador.id = novos_dados_narrador["id"]
                 narrador.nome = novos_dados_narrador["nome"]
-                narrador.dono = novos_dados_narrador["dono"]
+                narrador.idade = novos_dados_narrador["idade"]
+                narrador.temperamento = novos_dados_narrador["temperamento"]
                 self.lista_narradores()
                 self.__tela_narrador.mostra_mensagem("Narrador alterado com sucesso")
             else:
@@ -61,10 +56,10 @@ class ControladorNarrador:
     def excluir_narrador(self):
         self.lista_narradores()
         if self.__narradores:
-            id_campeonato = self.__tela_narrador.seleciona_narrador()
-            campeonato = self.lista_por_id(id_campeonato)
-            if campeonato is not None:
-                self.__narradores.remove(campeonato)
+            id_narrador = self.__tela_narrador.seleciona_narrador()
+            narrador = self.lista_por_id(id_narrador)
+            if narrador is not None:
+                self.__narradores.remove(narrador)
                 self.__tela_narrador.mostra_mensagem("Narrador excluído com sucesso")
             else:
                 self.__tela_narrador.mostra_mensagem("ATENÇÃO: Narrador não existente")
@@ -74,7 +69,7 @@ class ControladorNarrador:
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_narrador, 2: self.lista_narrador_por_id, 3: self.lista_narradores,
-                        4: self.excluir_narrador, 0: self.retornar}
+                        4: self.alterar_narrador, 5: self.excluir_narrador, 0: self.retornar}
 
         while True:
             opcao_escolhida = self.__tela_narrador.tela_opcoes()
@@ -85,9 +80,11 @@ class ControladorNarrador:
     def convert_to_view_object_list(narradores: []):
         view_object_list = []
         for narrador in narradores:
-            view_object_list.append({"id": narrador.id, "nome": narrador.nome, "dono": narrador.dono})
+            view_object_list.append({"id": narrador.id, "nome": narrador.nome, "idade": narrador.idade,
+                                     "temperamento": narrador.temperamento})
         return view_object_list
 
     @staticmethod
     def convert_to_view_object(narrador):
-        return {"id": narrador.id, "nome": narrador.nome, "dono": narrador.dono}
+        return {"id": narrador.id, "nome": narrador.nome, "idade": narrador.idade,
+                "temperamento": narrador.temperamento}

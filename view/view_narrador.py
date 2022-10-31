@@ -1,15 +1,13 @@
-import time
-
-
 class TelaNarrador:
     # Tratar exceções
     def tela_opcoes(self):
         print("-------- NARRADORES ----------")
         print("Escolha a opção")
         print("1 - Incluir narrador")
-        print("2 - Listar narradores por dono")
+        print("2 - Listar narrador por id")
         print("3 - Listar todos os narradores")
-        print("4 - Excluir narrador")
+        print("4 - Alterar narrador")
+        print("5 - Excluir narrador")
         print("0 - Retornar")
         print("-------------------------------")
 
@@ -17,31 +15,36 @@ class TelaNarrador:
         return opcao
 
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
-    def pega_dados_narradores(self):
+    def pega_dados_narrador(self):
         print("-------- DADOS NARRADOR ----------")
-        id = input("ID: ")
-        nome = input("Nome: ")
-        idade = input('Idade:')
-        temperamento = input("Temperamento: ")
+        id = self.le_num_inteiro("ID: ")
+        nome = self.le_string("Nome: ")
+        idade = self.le_string("Idade: ")
+        temperamento = self.le_string("Temperamento: ")
         print("------------------------------------")
-        return {'id': id, 'nome': nome, 'idade': idade, 'temperamento': temperamento}
+        return {"id": id, "nome": nome, "idade": idade, "temperamento": temperamento}
 
     def mostra_narrador(self, dados_narrador):
         # Tratar exceções
-        print("------------------------------------")
-        print('ID DO NARRADOR: ', dados_narrador['id'])
-        print('NOME DO NARRADOR: ', dados_narrador['nome'])
-        print('Idade: ', dados_narrador['idade'])
-        print('Temperamento: ', dados_narrador['temperamento'])
-        print("------------------------------------")
+        if dados_narrador is not None:
+            print("------------------------------------")
+            print('ID DO NARRADOR: ', dados_narrador['id'])
+            print('NOME DO NARRADOR: ', dados_narrador['nome'])
+            print('IDADE: ', dados_narrador['idade'])
+            print('TEMPERAMENTO: ', dados_narrador['temperamento'])
+            print("------------------------------------")
+        else:
+            print("Não há narradores cadastrados")
 
     def seleciona_narrador(self):
         # Tratar as exceções
-        id = input('ID do narrador que deseja selecionar: ')
+        id = self.le_num_inteiro('ID do narrador que deseja selecionar: ')
         return id
 
     def mostra_mensagem(self, msg):
+        print("--------------------------------------------------")
         print(msg)
+        print("--------------------------------------------------")
 
     def le_num_inteiro(self, mensagem=" ", ints_validos=None):
         while True:
@@ -52,6 +55,16 @@ class TelaNarrador:
                     raise ValueError
                 return valor_int
             except ValueError:
-                print("Valor incorreto!")
+                print("Valor inválido!")
                 if ints_validos:
                     print("Valores válidos: ", ints_validos)
+
+    def le_string(self, mensagem=" "):
+        while True:
+            valor_lido = input(mensagem)
+            try:
+                if valor_lido is None or '':
+                    raise ValueError
+                return valor_lido
+            except ValueError:
+                print("Valor inválido!")
