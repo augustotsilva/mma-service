@@ -6,33 +6,22 @@ class ControladorLuta:
         self.__lutas = []
         self.__tela_luta = TelaLuta(self)
         self.__controlador_sistema = controlador_sistema
-        
+
     def pega_luta_por_id(self, id: int):
         for luta in self.__lutas:
             if luta.id == id:
                 return luta
         return None
-    
+
     def lista_lutas(self):
         if len(self.__lutas) == 0:
             self.__tela_luta.mostra_mensagem('Lista de Lutas está vazia')
         else:
             for luta in self.__lutas:
                 self.__tela_luta.mostra_luta({'id': luta.id, 'lutador1': luta.lutador1.nome, 'lutador2': luta.lutador2.nome, 'data': luta.data, 'vencedor': luta.vencedor.nome, 'card': luta.card, 'local': luta.local})
-            
-    def lista_lutas_por_categoria(self):
-        categoria = self.__tela_luta.pega_categoria_luta()
-        self.__tela_luta.le_num_real(categoria)
-        if len(self.__lutas) == 0:
-            self.__tela_luta.mostra_mensagem('Lista de Lutas está vazia')
-        else:
-            for luta in self.__lutas:
-                if categoria - 0.5 < luta.lutador1.peso and luta.lutador2.peso < categoria + 0.5:
-                    self.__tela_luta.mostra_luta({'id': luta.id, 'lutador1': luta.lutador1, 'lutador2': luta.lutador2, 'narradores': luta.narradores, 'data': luta.data, 'vencedor': luta.vencedor, 'card': luta.card, 'local': luta.local})
-    
+
     def incluir_luta(self):
         dados_luta = self.__tela_luta.pega_dados_luta()
-
         try:
             lutador1 = self.__controlador_sistema.controlador_lutador.pega_lutador_por_id(dados_luta["id_lutador1"])
             if lutador1 is None:
@@ -46,7 +35,7 @@ class ControladorLuta:
                 raise Exception
         except Exception:
             return self.__tela_luta.mostra_mensagem('Nenhum Lutador possui o ID que você colocou na opção de segundo Lutador')
-                
+
         try:
             vencedor = self.__controlador_sistema.controlador_lutador.pega_lutador_por_id(dados_luta["id_vencedor"])
             if vencedor is None:

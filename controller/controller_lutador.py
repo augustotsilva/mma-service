@@ -1,6 +1,7 @@
 from view.view_lutador import TelaLutador
 from entity.lutador import Lutador
 
+
 class ControladorLutador:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
@@ -21,8 +22,8 @@ class ControladorLutador:
                 raise KeyError
             lutador = Lutador(dados_lutador['nome'], dados_lutador['idade'], dados_lutador['id'], dados_lutador['altura'], dados_lutador['peso'], dados_lutador['envergadura'])
             self.__lutadores.append(lutador)
-        except:
-            self.__tela_lutadores.mostra_mensagem("\nLutador já existente!\n")
+        except KeyError:
+            self.__tela_lutador.mostra_mensagem("\nLutador já existente!\n")
 
     def excluir_lutador(self):
         self.lista_lutadores()

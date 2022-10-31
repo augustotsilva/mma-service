@@ -21,20 +21,19 @@ class TelaNarrador:
         print("-------- DADOS NARRADOR ----------")
         id = input("ID: ")
         nome = input("Nome: ")
-        dono = input("Dono: ")
+        idade = input('Idade:')
+        temperamento = input("Temperamento: ")
         print("------------------------------------")
-        return {"id": id, "nome": nome, "dono": dono}
+        return {'id': id, 'nome': nome, 'idade': idade, 'temperamento': temperamento}
 
     def mostra_narrador(self, dados_narrador):
         # Tratar exceções
-        if dados_narrador is not None:
-            print("------------------------------------")
-            print('ID DO NARRADOR: ', dados_narrador['id'])
-            print('NOME DO NARRADOR: ', dados_narrador['nome'])
-            print('DONO: ', dados_narrador['dono'])
-            print("------------------------------------")
-        else:
-            print("Não há narradores cadastrados")
+        print("------------------------------------")
+        print('ID DO NARRADOR: ', dados_narrador['id'])
+        print('NOME DO NARRADOR: ', dados_narrador['nome'])
+        print('Idade: ', dados_narrador['idade'])
+        print('Temperamento: ', dados_narrador['temperamento'])
+        print("------------------------------------")
 
     def seleciona_narrador(self):
         # Tratar as exceções

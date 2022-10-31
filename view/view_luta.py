@@ -65,8 +65,8 @@ class TelaLuta:
             except:
                 print('Digite um número inteiro')
 
-        local = self.le_letra('Local da Luta: ')
-
+        local = input('Local da Luta: ')
+        
         return {'id': id, 'id_lutador1': id_lutador1, 'id_lutador2': id_lutador2, "data": data,
                 "id_vencedor": id_vencedor, "card": card, 'local': local}
 
@@ -81,15 +81,6 @@ class TelaLuta:
         print('CARD DA LUTA: ', dados_luta['card'])
         print('LOCAL DA LUTA: ', dados_luta['local'])
         print("\n")
-
-    def pega_categoria_luta(self):
-        # Falta coisa
-        while True:
-            try:
-                peso = float(input('Faixa de peso que deseja selecionar: '))
-                break
-            except ValueError:
-                print('Insira um valor numérico ')
 
     def seleciona_luta(self):
         while True:
@@ -123,14 +114,3 @@ class TelaLuta:
                 print("Valor incorreto!")
                 if ints_validos:
                     print("Valores válidos: ", ints_validos)
-
-    def le_letra(self, mensagem):
-        while True:
-            valor_lido = input(mensagem)
-            try:
-                if valor_lido.isalpha():
-                    return valor_lido
-                else:
-                    raise ValueError
-            except ValueError:
-                print('Digite uma palavra')

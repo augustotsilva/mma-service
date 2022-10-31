@@ -17,7 +17,7 @@ class TelaLutador:
 
     def pega_dados_lutador(self):
         print("-------- DADOS LUTADOR ----------")
-        nome = self.le_letra("Nome: ")
+        nome = input("Nome: ")
         while True:
             try:
                 idade = int(input("Idade: "))
@@ -97,6 +97,7 @@ class TelaLutador:
             except ValueError:
                 print("Digite um número")
 
+    '''
     def le_letra(self, mensagem):
         while True:
             valor_lido = input(mensagem)
@@ -107,3 +108,4 @@ class TelaLutador:
                     raise ValueError
             except ValueError:
                 print('Digite uma palavra')
+    '''
