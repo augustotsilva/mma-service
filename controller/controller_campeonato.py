@@ -85,13 +85,26 @@ class ControladorCampeonato:
         except ValueError:
             self.__tela_campeonato.mostra_mensagem("ATENÇÃO: Campeonato não existente")
 
+    def incluir_luta_ao_campeonato(self):
+        id_campeonato = self.__tela_campeonato.seleciona_campeonato()
+        id_luta = self.__tela_campeonato.seleciona_luta()
+        try:
+            campeonato = self.lista_por_id(id_campeonato)
+            luta = self.__controlador_sistema.controlador_narrador.lista_por_id(id_luta)
+            campeonato.adicionar_luta(luta)
+            self.__tela_campeonato.mostra_mensagem("Luta ligada ao campeonato com sucesso")
+        except ValueError:
+            self.__tela_campeonato.mostra_mensagem("ATENÇÃO: Luta não existente")
+
     def retornar(self):
         self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_campeonato, 2: self.lista_campeonato_por_id,
                         3: self.lista_campeonatos_por_dono, 4: self.lista_campeonatos,
-                        5: self.alterar_campeonato, 6: self.excluir_campeonato, 0: self.retornar}
+                        5: self.alterar_campeonato, 6: self.excluir_campeonato,
+                        7: self.incluir_luta_ao_campeonato, 8: self.listar_lutas_do_campeonato,
+                        9: self.remover_luta_do_campeonato, 0: self.retornar}
 
         while True:
             opcao_escolhida = self.__tela_campeonato.tela_opcoes()
