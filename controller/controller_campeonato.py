@@ -38,8 +38,7 @@ class ControladorCampeonato:
     def lista_campeonatos(self):
         if self.__campeonatos:
             for campeonato in self.__campeonatos:
-                self.__tela_campeonato.mostra_campeonato(
-                    {'id': campeonato.id, 'nome': campeonato.nome, 'dono': campeonato.dono})
+                self.__tela_campeonato.mostra_campeonato(self.convert_to_view_object(campeonato))
         else:
             self.__tela_campeonato.mostra_mensagem("Não há campeonatos cadastrados")
 
@@ -90,3 +89,16 @@ class ControladorCampeonato:
             opcao_escolhida = self.__tela_campeonato.tela_opcoes()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
+
+    @staticmethod
+    def convert_to_view_object_list(narradores: []):
+        view_object_list = []
+        for narrador in narradores:
+            view_object_list.append({"id": narrador.id, "nome": narrador.nome, "idade": narrador.idade,
+                                     "temperamento": narrador.temperamento})
+        return view_object_list
+
+    @staticmethod
+    def convert_to_view_object(narrador):
+        return {"id": narrador.id, "nome": narrador.nome, "idade": narrador.idade,
+                "temperamento": narrador.temperamento}
