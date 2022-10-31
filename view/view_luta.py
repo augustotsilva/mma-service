@@ -38,7 +38,7 @@ class TelaLuta:
             except:
                 print('\nDigite um número inteiro\n')
 
-        id_narradores = [w for w in input('IDs dos Narradores que deseja selecionar: ').split()]
+        id_narradores = [int(w) for w in input('IDs dos Narradores que deseja selecionar: ').split()]
 
         data = input('Data da Luta: ')
 
