@@ -22,21 +22,21 @@ class TelaLuta:
                 id = int(input("ID da Luta: "))
                 break
             except:
-                print('Digite um número inteiro')
+                print('\nDigite um número inteiro\n')
 
         while True:
             try:
                 id_lutador1 = int(input("ID do primeiro Lutador: "))
                 break
             except:
-                print('Digite um número inteiro')
+                print('\nDigite um número inteiro\n')
 
         while True:
             try:
                 id_lutador2 = int(input("ID do segundo Lutador: "))
                 break
             except:
-                print('Digite um número inteiro')
+                print('\nDigite um número inteiro\n')
 
         #narradores = list(input('Narradores: '))
 
@@ -48,21 +48,21 @@ class TelaLuta:
                     id_vencedor = int(input("ID do Lutador vencedor: "))
                     break
                 except:
-                    print('Digite um número inteiro')
+                    print('\nDigite um número inteiro\n')
             try:
                 if id_vencedor != id_lutador1 and id_vencedor != id_lutador2:
                     raise Exception
                 else:
                     break
             except Exception:
-                print('O ID do vencedor da Luta precisa ser um dos IDs dos Lutadores cadatrados!')
+                print('\nO ID do vencedor da Luta precisa ser um dos IDs dos Lutadores cadatrados!\n')
 
         while True:
             try:
                 card = int(input("Card da luta: "))
                 break
             except:
-                print('Digite um número inteiro')
+                print('\nDigite um número inteiro\n')
 
         local = input('Local da Luta: ')
         
