@@ -12,15 +12,15 @@ class TelaCampeonato:
         print("0 - Retornar")
         print("-------------------------------")
 
-        opcao = int(input("Escolha a opção: "))
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0, 1, 2, 3, 4, 5, 6])
         return opcao
 
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_campeonato(self):
         print("-------- DADOS CAMPEONATO ----------")
-        id = input("ID: ")
-        nome = input("Nome: ")
-        dono = input("Dono: ")
+        id = self.le_num_inteiro("ID: ")
+        nome = self.le_string("Nome: ")
+        dono = self.le_string("Dono: ")
         print("------------------------------------")
         return {"id": id, "nome": nome, "dono": dono}
 
@@ -37,11 +37,18 @@ class TelaCampeonato:
 
     def seleciona_campeonato(self):
         # Tratar as exceções
-        id = input('ID do campeonato que deseja selecionar: ')
+        id = self.le_num_inteiro('ID do campeonato que deseja selecionar: ')
         return id
 
+    def seleciona_dono(self):
+        # Tratar as exceções
+        dono = self.le_string('Nome do dono que deseja selecionar: ')
+        return dono
+
     def mostra_mensagem(self, msg):
+        print("--------------------------------------------------")
         print(msg)
+        print("--------------------------------------------------")
 
     def le_num_inteiro(self, mensagem=" ", ints_validos=None):
         while True:
@@ -52,6 +59,16 @@ class TelaCampeonato:
                     raise ValueError
                 return valor_int
             except ValueError:
-                print("Valor incorreto!")
+                print("Valor inválido!")
                 if ints_validos:
                     print("Valores válidos: ", ints_validos)
+
+    def le_string(self, mensagem=" "):
+        while True:
+            valor_lido = input(mensagem)
+            try:
+                if valor_lido is None or '':
+                    raise ValueError
+                return valor_lido
+            except ValueError:
+                print("Valor inválido!")
