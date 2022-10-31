@@ -19,10 +19,7 @@ class ControladorLuta:
             self.__tela_luta.mostra_mensagem('\nLista de Lutas está vazia\n')
         else:
             for luta in self.__lutas:
-                lista_narradores = []
-                for narrador in luta.narradores:
-                    lista_narradores.append(narrador.nome)
-                self.__tela_luta.mostra_luta({'id': luta.id, 'lutador1': luta.lutador1.nome, 'lutador2': luta.lutador2.nome, 'narradores': lista_narradores , 'data': luta.data, 'vencedor': luta.vencedor.nome, 'card': luta.card, 'local': luta.local})
+                self.__tela_luta.mostra_luta({'id': luta.id, 'lutador1': luta.lutador1.nome, 'lutador2': luta.lutador2.nome, 'data': luta.data, 'vencedor': luta.vencedor.nome, 'card': luta.card, 'local': luta.local})
 
     def incluir_luta(self):
         dados_luta = self.__tela_luta.pega_dados_luta()
@@ -117,20 +114,19 @@ class ControladorLuta:
             except Exception:
                 return self.__tela_luta.mostra_mensagem('\nNenhum Lutador possui esse ID\n')
             
-            try:
-                narradores = []
-                for id_narrador in novos_dados_luta["id_narradores"]:
-                    narradores.append(self.__controlador_sistema.controlador_narrador.lista_por_id(id_narrador))
-                for narrador in narradores:
-                    if narrador is None:
-                        raise Exception
-            except Exception:
-                return self.__tela_luta.mostra_mensagem('Algum ID inserido não tem um Narrador correspondente!')
-  
+            # try:
+            #     narradores = []
+            #     for id_narrador in dados_luta["id_narradores"]:
+            #         narradores.append(self.__controlador_sistema.controlador_narrador.lista_por_id(id_narrador))
+            #     for narrador in narradores:
+            #         if narrador is None:
+            #             raise Exception
+            # except Exception:
+            #     return self.__tela_luta.mostra_mensagem('Algum ID inserido não tem um Narrador correspondente!')
+            #
             luta.id = novos_dados_luta["id"]
             luta.lutador1 = lutador1
             luta.lutador2 = lutador2
-            #luta.narradores = novos_dados_luta["narradores"]
             luta.data = novos_dados_luta["data"]
             luta.vencedor = vencedor
             luta.card = novos_dados_luta["card"]

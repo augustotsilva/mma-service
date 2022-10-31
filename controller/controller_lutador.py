@@ -59,7 +59,7 @@ class ControladorLutador:
                 else:
                     raise Exception
             except Exception:
-                self.__tela_lutador.mostra_mensagem('\nNão há nenhum Lutador nessa faixa de peso!\n')
+                return self.__tela_lutador.mostra_mensagem('\nNão há nenhum Lutador nessa faixa de peso!\n')
 
     def alterar_lutador(self):
         if len(self.__lutadores) != 0:
