@@ -36,6 +36,9 @@ class ControladorLuta:
         except Exception:
             return self.__tela_luta.mostra_mensagem('Nenhum Lutador possui o ID que você colocou na opção de segundo Lutador')
 
+        if lutador1.id == lutador2.id:
+            return self.__tela_luta.mostra_mensagem('Impossível fazer a luta com os mesmos lutadores!')
+
         try:
             vencedor = self.__controlador_sistema.controlador_lutador.pega_lutador_por_id(dados_luta["id_vencedor"])
             if vencedor is None:
@@ -97,11 +100,11 @@ class ControladorLuta:
                 return self.__tela_luta.mostra_mensagem('Nenhum Lutador possui esse ID')
   
             luta.id = novos_dados_luta["id"]
-            luta.lutador1 = novos_dados_luta["lutador1"]
-            luta.lutador2 = novos_dados_luta["lutador2"]
+            luta.lutador1 = lutador1
+            luta.lutador2 = lutador2
             #luta.narradores = novos_dados_luta["narradores"]
             luta.data = novos_dados_luta["data"]
-            luta.vencedor = novos_dados_luta["vencedor"]
+            luta.vencedor = vencedor
             luta.card = novos_dados_luta["card"]
             luta.local = novos_dados_luta["local"]
             self.lista_lutas()
@@ -110,7 +113,7 @@ class ControladorLuta:
         self.__controlador_sistema.abre_tela()
         
     def abre_tela(self):
-        lista_opcoes = {1: self.incluir_luta, 2: self.lista_lutas_por_categoria, 3: self.lista_lutas, 4: self.alterar_luta, 5: self.excluir_luta, 0: self.retornar}
+        lista_opcoes = {1: self.incluir_luta, 2: self.lista_lutas, 3: self.alterar_luta, 4: self.excluir_luta, 0: self.retornar}
         
         continua = True
         while continua:

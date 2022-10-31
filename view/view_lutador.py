@@ -96,16 +96,3 @@ class TelaLutador:
                 return valor_float
             except ValueError:
                 print("Digite um número")
-
-    '''
-    def le_letra(self, mensagem):
-        while True:
-            valor_lido = input(mensagem)
-            try:
-                if valor_lido.isalpha():
-                    return valor_lido
-                else:
-                    raise ValueError
-            except ValueError:
-                print('Digite uma palavra')
-    '''

@@ -6,13 +6,12 @@ class TelaLuta:
         print("-------- LUTAS ----------")
         print("Escolha a opção")
         print("1 - Incluir Luta")
-        print("2 - Listar Lutas por Categoria")
-        print("3 - Listar Todas as Lutas")
-        print('4 - Alterar Luta')
-        print("5 - Excluir Luta")
+        print("2 - Listar Todas as Lutas")
+        print('3 - Alterar Luta')
+        print("4 - Excluir Luta")
         print("0 - Retornar")
 
-        opcao = self.le_num_inteiro("Escolha a opção:", [0, 1, 2, 3, 4, 5])
+        opcao = self.le_num_inteiro("Escolha a opção:", [0, 1, 2, 3, 4])
         return opcao
 
     def pega_dados_luta(self):
@@ -96,7 +95,7 @@ class TelaLuta:
             else:
                 return luta
         except Exception:
-            print("Essa Luta não existe")
+            print("\nEssa Luta não existe\n")
             return luta
 
     def mostra_mensagem(self, msg):
