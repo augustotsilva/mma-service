@@ -91,7 +91,10 @@ class ControladorLuta:
                     raise Exception
             except Exception:
                 return self.__tela_luta.mostra_mensagem('Nenhum Lutador possui o ID que você colocou na opção de segundo Lutador')
-                    
+            
+            if lutador1.id == lutador2.id:
+                return self.__tela_luta.mostra_mensagem('Impossível fazer a luta com os mesmos lutadores!')
+            
             try:
                 vencedor = self.__controlador_sistema.controlador_lutador.pega_lutador_por_id(novos_dados_luta["id_vencedor"])
                 if vencedor is None:
