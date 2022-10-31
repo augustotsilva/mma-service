@@ -47,3 +47,11 @@ class ControladorSistema:
     @property
     def controlador_luta(self):
         return self.__controlador_luta
+    
+    @property
+    def controlador_campeonato(self):
+        return self.__controlador_campeonato
+    
+    @property
+    def controlador_narrador(self):
+        return self.__controlador_narrador
