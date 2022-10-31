@@ -47,11 +47,22 @@ class ControladorLuta:
             return self.__tela_luta.mostra_mensagem('\nNenhum Lutador possui esse ID\n')
                 
         id = dados_luta['id']
+        
+        try:
+            narradores = []
+            for id_narrador in dados_luta["id_narradores"]:
+                narradores.append(self.__controlador_sistema.controlador_narrador.lista_por_id(id_narrador))
+            for narrador in narradores:
+                if narrador is None:
+                    raise Exception
+        except Exception:
+            return self.__tela_luta.mostra_mensagem('Algum ID inserido não tem um Narrador correspondente!')
+            
         data = dados_luta['data']
         card = dados_luta['card']
         local = dados_luta['local']
         
-        luta = Luta(id, lutador1, lutador2, data, vencedor, card, local)
+        luta = Luta(id, lutador1, lutador2, narradores, data, vencedor, card, local)
         self.__lutas.append(luta)
         return self.__tela_luta.mostra_mensagem('\nLuta incluida com sucesso!\n')
     

@@ -8,10 +8,11 @@ class ControladorNarrador:
         self.__tela_narrador = TelaNarrador()
         self.__narradores = []
 
-    def lista_por_id(self, id: int = None):
+    def lista_por_id(self, id: int):
         for narrador in self.__narradores:
             if narrador.id == id:
                 return narrador
+        return None
 
     def lista_narrador_por_id(self):
         if not self.__narradores:
@@ -76,7 +77,7 @@ class ControladorNarrador:
             funcao_escolhida()
 
     @staticmethod
-    def convert_to_view_object_list(narradores: []):
+    def convert_to_view_object_list(narradores):
         view_object_list = []
         for narrador in narradores:
             view_object_list.append({"id": narrador.id, "nome": narrador.nome, "idade": narrador.idade,
