@@ -1,8 +1,8 @@
 from controller.controller_campeonato import ControladorCampeonato
+from controller.controller_luta import ControladorLuta
 from controller.controller_lutador import ControladorLutador
 from controller.controller_narrador import ControladorNarrador
 from view.view_sistema import TelaSistema
-from controller.controller_luta import ControladorLuta
 
 
 class ControladorSistema:
@@ -47,11 +47,11 @@ class ControladorSistema:
     @property
     def controlador_luta(self):
         return self.__controlador_luta
-    
+
     @property
     def controlador_campeonato(self):
         return self.__controlador_campeonato
-    
+
     @property
     def controlador_narrador(self):
         return self.__controlador_narrador

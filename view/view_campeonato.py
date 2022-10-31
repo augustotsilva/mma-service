@@ -9,10 +9,12 @@ class TelaCampeonato:
         print("4 - Listar todos os campeonatos")
         print("5 - Alterar campeonato")
         print("6 - Excluir campeonato")
+        print("7 - Incluir luta ao campeonato")
+        print("8 - Excluir luta do campeonato")
         print("0 - Retornar")
         print("-------------------------------")
 
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0, 1, 2, 3, 4, 5, 6])
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0, 1, 2, 3, 4, 5, 6, 7, 8])
         return opcao
 
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
