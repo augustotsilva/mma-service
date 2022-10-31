@@ -90,14 +90,3 @@ class ControladorCampeonato:
             opcao_escolhida = self.__tela_campeonato.tela_opcoes()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
-
-    @staticmethod
-    def convert_to_view_object_list(campeonatos: []):
-        view_object_list = []
-        for campeonato in campeonatos:
-            view_object_list.append({"id": campeonato.id, "nome": campeonato.nome, "dono": campeonato.dono})
-        return view_object_list
-
-    @staticmethod
-    def convert_to_view_object(campeonato):
-        return {"id": campeonato.id, "nome": campeonato.nome, "dono": campeonato.dono}
