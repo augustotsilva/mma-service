@@ -15,7 +15,6 @@ class TelaLuta:
         return opcao
 
     def pega_dados_luta(self):
-        # Falta a exceção dos Narradores
         print("-------- DADOS LUTA ----------")
         while True:
             try:
@@ -37,6 +36,8 @@ class TelaLuta:
                 break
             except:
                 print('\nDigite um número inteiro\n')
+
+        id_narradores = [int(id_narrador) for id_narrador in input('IDs dos Narradores que deseja selecionar: ').split()]
 
         data = input('Data da Luta: ')
 
@@ -64,7 +65,7 @@ class TelaLuta:
 
         local = input('Local da Luta: ')
         
-        return {'id': id, 'id_lutador1': id_lutador1, 'id_lutador2': id_lutador2, "data": data,
+        return {'id': id, 'id_lutador1': id_lutador1, 'id_lutador2': id_lutador2, 'id_narradores': id_narradores, "data": data,
                 "id_vencedor": id_vencedor, "card": card, 'local': local}
 
     def mostra_luta(self, dados_luta):
@@ -72,6 +73,10 @@ class TelaLuta:
         print('ID DA LUTA: ', dados_luta['id'])
         print('PRIMEIRO LUTADOR DA LUTA: ', dados_luta['lutador1'])
         print('SEGUNDO LUTADOR DA LUTA: ', dados_luta['lutador2'])
+        print('NARRADORES DA LUTA: ', end='')
+        for narrador in dados_luta['narradores']:
+            print(narrador, end=' ')
+            print()
         print('DATA DA LUTA: ', dados_luta['data'])
         print('VENCEDOR DA LUTA: ', dados_luta['vencedor'])
         print('CARD DA LUTA: ', dados_luta['card'])
