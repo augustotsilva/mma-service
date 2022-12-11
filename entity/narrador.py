@@ -7,7 +7,6 @@ class Narrador(Pessoa):
         self.__id = id
         self.__temperamento = temperamento
 
-
     @property
     def id(self):
         return self.__id
@@ -23,4 +22,3 @@ class Narrador(Pessoa):
     @temperamento.setter
     def temperamento(self, temperamento: int):
         self.__temperamento = temperamento
-
