@@ -1,10 +1,6 @@
-from controller.controller_lutador import *
-
-
 class TelaLutador:
     def __init__(self, controlador_lutador):
-        if isinstance(controlador_lutador, ControladorLutador):
-            self.__controlador_lutador = controlador_lutador
+        self.__controlador_lutador = controlador_lutador
 
     def tela_opcoes(self):
         print("-------- LUTADORES ----------")
@@ -12,67 +8,82 @@ class TelaLutador:
         print("1 - Incluir Lutador")
         print("2 - Listar Lutadores por Peso")
         print("3 - Listar Todos Lutadores")
-        print("4 - Excluir Lutador")
+        print("4 - Alterar Lutadores")
+        print("5 - Excluir Lutador")
         print("0 - Retornar")
 
-        opcao = self.le_num_inteiro("Escolha a opção:", [0,1,2,3,4])
+        opcao = self.le_num_inteiro("Escolha a opção:", [0, 1, 2, 3, 4, 5])
         return opcao
-    
+
     def pega_dados_lutador(self):
         print("-------- DADOS LUTADOR ----------")
-        nome = self.le_letra(input("Nome: "))
+        while True:
+            nome_e = input('Nome: ')
+            try:
+                nome = int(nome_e)
+                print('\nDigite um nome!\n')
+            except:
+                nome = nome_e
+                break
+            
         while True:
             try:
                 idade = int(input("Idade: "))
                 break
             except:
-                print('Insira um valor inteiro')
+                print('\nInsira um valor inteiro\n')
         while True:
             try:
                 id = int(input("ID: "))
+                break
             except:
-                print('Insira um valor inteiro')        
-        altura = self.le_num_real(input('Altura: '))
-        peso = self.le_num_real(input('Peso: '))
-        envergadura = self.le_num_real(input('Envergadura: '))
+                print('\nInsira um valor inteiro\n')
+        altura = self.le_num_real('Altura: ')
+        peso = self.le_num_real('Peso: ')
+        envergadura = self.le_num_real('Envergadura: ')
 
-        return {"nome": nome, "idade": idade, "id": id, "altura": altura, "peso": peso, "envergadura" : envergadura}
-    
+        return {'nome': nome, 'idade': idade, 'id': id, 'altura': altura, 'peso': peso, 'envergadura': envergadura}
+
     def mostra_lutador(self, dados_lutador):
+        print()
         print('NOME DO LUTADOR: ', dados_lutador['nome'])
         print('IDADE DO LUTADOR: ', dados_lutador['idade'])
         print('ID DO LUTADOR: ', dados_lutador['id'])
         print('ALTURA DO LUTADOR: ', dados_lutador['altura'])
         print('PESO DO LUTADOR: ', dados_lutador['peso'])
         print('ENVERGADURA DO LUTADOR: ', dados_lutador['envergadura'])
-        print()
-        
+        print("\n")
+
     def seleciona_lutador(self):
         while True:
-            while True:
-                id = input('ID do Lutador que deseja selecionar: ')
-                try:
-                    id_int = int(id)
-                    break
-                except ValueError:
-                    print('Você não está digitando um valor válido')
+            id = input('ID do Lutador que deseja selecionar: ')
             try:
-                id_valido = self.__controlador_lutador.pega_lutador_por_id(id_int)
-                if id_valido is None:
-                    raise Exception
-                else:
-                    return id_valido
-            except Exception:
-                print("Esse Lutador não existe")
+                id_int = int(id)
+                break
+            except:
+                print('\nVocê não está digitando um valor válido\n')
+        try:
+            lutador = self.__controlador_lutador.pega_lutador_por_id(id_int)
+            if lutador is None:
+                raise Exception
+            else:
+                return lutador
+        except Exception:
+            print("\nEsse Lutador não existe\n")
+            return lutador
+    
+    def pega_peso_lutador(self):
+        while True:
+            try:
+                peso = float(input('Faixa de peso que deseja selecionar: '))
+                return peso
+            except ValueError:
+                print('\nInsira um valor numérico\n')
 
     def mostra_mensagem(self, msg):
         print(msg)
 
-    @property
-    def controlador_lutador(self):
-        return self.__controlador_lutador
-
-    def le_num_inteiro(self, mensagem=" ", ints_validos = None):
+    def le_num_inteiro(self, mensagem=" ", ints_validos=None):
         while True:
             valor_lido = input(mensagem)
             try:
@@ -84,7 +95,7 @@ class TelaLutador:
                 print("Valor incorreto!")
                 if ints_validos:
                     print("Valores válidos: ", ints_validos)
-    
+
     def le_num_real(self, mensagem=" "):
         while True:
             valor_lido = input(mensagem)
@@ -92,13 +103,4 @@ class TelaLutador:
                 valor_float = float(valor_lido)
                 return valor_float
             except ValueError:
-                print("Digite um número")
-
-    def le_letra(self, mensagem):
-        while True:
-            valor_lido = input(mensagem)
-            try:
-                valor_errado = float(valor_lido)
-                print('Você digitou um número, e não uma palavra')
-            except ValueError:
-                return valor_lido
+                print("\nDigite um número\n")

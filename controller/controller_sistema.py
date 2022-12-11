@@ -1,26 +1,17 @@
+from controller.controller_campeonato import ControladorCampeonato
+from controller.controller_luta import ControladorLuta
+from controller.controller_lutador import ControladorLutador
+from controller.controller_narrador import ControladorNarrador
+from view.view_sistema import TelaSistema
+
+
 class ControladorSistema:
     def __init__(self):
+        self.__tela_sistema = TelaSistema()
+        self.__controlador_campeonato = ControladorCampeonato(self)
         self.__controlador_luta = ControladorLuta(self)
         self.__controlador_lutador = ControladorLutador(self)
         self.__controlador_narrador = ControladorNarrador(self)
-        self.__controlador_campeonato = ControladorCampeonato(self)
-        self.__tela_sistema = TelaSistema()
-
-    @property
-    def controlador_luta(self):
-        return self.__controlador_luta
-
-    @property
-    def controlador_lutador(self):
-        return self.__controlador_lutador
-
-    @property
-    def controlador_narrador(self):
-        return self.__controlador_narrador
-
-    @property
-    def controlador_campeonato(self):
-        return self.__controlador_campeonato
 
     def cadastra_luta(self):
         self.__controlador_luta.abre_tela()
@@ -41,10 +32,26 @@ class ControladorSistema:
         exit(0)
 
     def abre_tela(self):
-        lista_opcoes = {1: self.cadastra_luta, 2: self.cadastra_lutador, 3: self.cadastra_narrador, 4: self.cadastra_campeonato,
-                        0: self.encerra_sistema}
+        lista_opcoes = {1: self.cadastra_luta, 2: self.cadastra_lutador, 3: self.cadastra_narrador,
+                        4: self.cadastra_campeonato, 0: self.encerra_sistema}
 
         while True:
             opcao_escolhida = self.__tela_sistema.tela_opcoes()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
+
+    @property
+    def controlador_lutador(self):
+        return self.__controlador_lutador
+
+    @property
+    def controlador_luta(self):
+        return self.__controlador_luta
+
+    @property
+    def controlador_campeonato(self):
+        return self.__controlador_campeonato
+
+    @property
+    def controlador_narrador(self):
+        return self.__controlador_narrador

@@ -4,3 +4,6 @@
 /.idea/mma-service.iml
 /.idea/inspectionProfiles/profiles_settings.xml
 /.idea/vcs.xml
+/.idea/dictionaries/nsd_asilva.xml
+/.idea/*
+.pyc
