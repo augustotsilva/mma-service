@@ -1,3 +1,4 @@
+from dao.campeonato_dao import CampeonatoDAO
 from entity.campeonato import Campeonato
 from view.view_campeonato import *
 
@@ -6,6 +7,7 @@ class ControladorCampeonato:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__tela_campeonato = TelaCampeonato()
+        self.__campeonatoDAO = CampeonatoDAO()
         self.__campeonatos = []
         self.__lutas = []
 
@@ -136,14 +138,12 @@ class ControladorCampeonato:
             funcao_escolhida()
 
     @staticmethod
-    def convert_to_view_object_list(narradores: []):
+    def convert_to_view_object_list(campeonatos: []):
         view_object_list = []
-        for narrador in narradores:
-            view_object_list.append({"id": narrador.id, "nome": narrador.nome, "idade": narrador.idade,
-                                     "temperamento": narrador.temperamento})
+        for campeonato in campeonatos:
+            view_object_list.append({"id": campeonato.id, "nome": campeonato.nome, "dono": campeonato.dono})
         return view_object_list
 
     @staticmethod
-    def convert_to_view_object(narrador):
-        return {"id": narrador.id, "nome": narrador.nome, "idade": narrador.idade,
-                "temperamento": narrador.temperamento}
+    def convert_to_view_object(campeonato):
+        return {"id": campeonato.id, "nome": campeonato.nome, "dono": campeonato.dono}

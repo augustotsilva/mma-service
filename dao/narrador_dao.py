@@ -1,8 +1,8 @@
-from DAO.base_dao import DAO
+from dao.base_dao import BaseDAO
 from entity.narrador import Narrador
 
 
-class NarradorDAO(DAO):
+class NarradorDAO(BaseDAO):
     def __init__(self):
         super().__init__('narradores.pkl')
 

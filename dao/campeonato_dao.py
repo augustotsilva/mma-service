@@ -1,18 +1,18 @@
-from DAO.base_dao import DAO
+from dao.base_dao import BaseDAO
 from entity.campeonato import Campeonato
 
 
-class CampeonatoDAO(DAO):
+class CampeonatoDAO(BaseDAO):
     def __init__(self):
         super().__init__('campeonatos.pkl')
 
     def add(self, campeonato: Campeonato):
-        if ((campeonato is not None) and isinstance(campeonato, Campeonato) and isinstance(campeonato.cpf, int)):
-            super().add(campeonato.cpf, campeonato)
+        if ((campeonato is not None) and isinstance(campeonato, Campeonato) and isinstance(campeonato.id, int)):
+            super().add(campeonato.id, campeonato)
 
     def update(self, campeonato: Campeonato):
-        if ((campeonato is not None) and isinstance(campeonato, Campeonato) and isinstance(campeonato.cpf, int)):
-            super().update(campeonato.cpf, campeonato)
+        if ((campeonato is not None) and isinstance(campeonato, Campeonato) and isinstance(campeonato.id, int)):
+            super().update(campeonato.id, campeonato)
 
     def get(self, key: int):
         if isinstance(key, int):

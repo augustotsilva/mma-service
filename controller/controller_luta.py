@@ -1,3 +1,4 @@
+from dao.luta_dao import LutaDAO
 from entity.luta import Luta
 from view.view_luta import TelaLuta
 
@@ -6,6 +7,7 @@ class ControladorLuta:
     def __init__(self, controlador_sistema):
         self.__lutas = []
         self.__tela_luta = TelaLuta(self)
+        self.__lutaDAO = LutaDAO()
         self.__controlador_sistema = controlador_sistema
 
     def pega_luta_por_id(self, id: int):

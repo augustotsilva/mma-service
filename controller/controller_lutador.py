@@ -1,10 +1,12 @@
-from view.view_lutador import TelaLutador
+from dao.lutador_dao import LutadorDAO
 from entity.lutador import Lutador
+from view.view_lutador import TelaLutador
 
 
 class ControladorLutador:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
+        self.__lutadorDAO = LutadorDAO()
         self.__lutadores = []
         self.__tela_lutador = TelaLutador(self)
 

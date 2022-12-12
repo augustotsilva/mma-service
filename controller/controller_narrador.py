@@ -1,4 +1,4 @@
-from DAO.narrador_dao import NarradorDAO
+from dao.narrador_dao import NarradorDAO
 from entity.narrador import Narrador
 from view.view_narrador import TelaNarrador
 
