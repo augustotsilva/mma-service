@@ -2,7 +2,7 @@ import pickle
 from abc import ABC, abstractmethod
 
 
-class DAO(ABC):
+class BaseDAO(ABC):
     @abstractmethod
     def __init__(self, datasource=''):
         self.__datasource = datasource

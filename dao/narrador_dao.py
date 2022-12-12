@@ -1,8 +1,8 @@
-from DAO.base_dao import DAO
+from dao.base_dao import BaseDAO
 from entity.narrador import Narrador
 
 
-class NarradorDAO(DAO):
+class NarradorDAO(BaseDAO):
     def __init__(self):
         super().__init__('narradores.pkl')
 
@@ -18,6 +18,6 @@ class NarradorDAO(DAO):
         if isinstance(key, int):
             return super().get(key)
 
-    def remove(selfself, key: int):
+    def remove(self, key: int):
         if isinstance(key, int):
             return super().remove(key)

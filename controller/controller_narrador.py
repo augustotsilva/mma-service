@@ -1,4 +1,4 @@
-from DAO.narrador_dao import NarradorDAO
+from dao.narrador_dao import NarradorDAO
 from entity.narrador import Narrador
 from view.view_narrador import TelaNarrador
 
@@ -8,7 +8,6 @@ class ControladorNarrador:
         self.__controlador_sistema = controlador_sistema
         self.__tela_narrador = TelaNarrador()
         self.__narradorDAO = NarradorDAO()
-        self.__narradores = []
 
     def lista_por_id(self, id: int):
         return self.__narradorDAO.get(id)

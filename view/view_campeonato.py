@@ -11,10 +11,11 @@ class TelaCampeonato:
         print("6 - Excluir campeonato")
         print("7 - Incluir luta ao campeonato")
         print("8 - Excluir luta do campeonato")
+        print("9 - Listar lutas do campeonato")
         print("0 - Retornar")
         print("-------------------------------")
 
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0, 1, 2, 3, 4, 5, 6, 7, 8])
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
         return opcao
 
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
@@ -56,6 +57,21 @@ class TelaCampeonato:
         print("--------------------------------------------------")
         print(msg)
         print("--------------------------------------------------")
+
+    def mostra_luta_campeonato(self, dados_luta):
+        print()
+        print('ID DA LUTA: ', dados_luta['id'])
+        print('PRIMEIRO LUTADOR DA LUTA: ', dados_luta['lutador1'])
+        print('SEGUNDO LUTADOR DA LUTA: ', dados_luta['lutador2'])
+        print('NARRADORES DA LUTA: ', end='')
+        for narrador in dados_luta['narradores']:
+            print(narrador, end=' ')
+            print()
+        print('DATA DA LUTA: ', dados_luta['data'])
+        print('VENCEDOR DA LUTA: ', dados_luta['vencedor'])
+        print('CARD DA LUTA: ', dados_luta['card'])
+        print('LOCAL DA LUTA: ', dados_luta['local'])
+        print("\n")
 
     @staticmethod
     def le_num_inteiro(mensagem=" ", ints_validos=None):
