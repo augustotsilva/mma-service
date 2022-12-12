@@ -7,12 +7,12 @@ class NarradorDAO(DAO):
         super().__init__('narradores.pkl')
 
     def add(self, narrador: Narrador):
-        if ((narrador is not None) and isinstance(narrador, Narrador) and isinstance(narrador.cpf, int)):
-            super().add(narrador.cpf, narrador)
+        if ((narrador is not None) and isinstance(narrador, Narrador) and isinstance(narrador.id, int)):
+            super().add(narrador.id, narrador)
 
     def update(self, narrador: Narrador):
-        if ((narrador is not None) and isinstance(narrador, Narrador) and isinstance(narrador.cpf, int)):
-            super().update(narrador.cpf, narrador)
+        if ((narrador is not None) and isinstance(narrador, Narrador) and isinstance(narrador.id, int)):
+            super().update(narrador.id, narrador)
 
     def get(self, key: int):
         if isinstance(key, int):

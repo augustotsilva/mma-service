@@ -1,3 +1,4 @@
+from DAO.narrador_dao import NarradorDAO
 from entity.narrador import Narrador
 from view.view_narrador import TelaNarrador
 
@@ -6,23 +7,22 @@ class ControladorNarrador:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__tela_narrador = TelaNarrador()
+        self.__narradorDAO = NarradorDAO()
         self.__narradores = []
 
     def lista_por_id(self, id: int):
-        for narrador in self.__narradores:
-            if narrador.id == id:
-                return narrador
-        return None
+        return self.__narradorDAO.get(id)
 
     def lista_narrador_por_id(self):
-        if not self.__narradores:
+        if not self.__narradorDAO.get_all():
             return self.__tela_narrador.mostra_mensagem("Não há narradores registrados")
         narrador = self.lista_por_id(self.__tela_narrador.seleciona_narrador())
         return self.__tela_narrador.mostra_narrador(self.convert_to_view_object(narrador))
 
     def lista_narradores(self):
-        if self.__narradores:
-            for narrador in self.__narradores:
+        narradores = self.__narradorDAO.get_all()
+        if narradores:
+            for narrador in narradores:
                 self.__tela_narrador.mostra_narrador(self.convert_to_view_object(narrador))
         else:
             self.__tela_narrador.mostra_mensagem("Não há narradores cadastrados")
@@ -30,16 +30,17 @@ class ControladorNarrador:
     def incluir_narrador(self):
         dados_narrador = self.__tela_narrador.pega_dados_narrador()
         if self.lista_por_id(dados_narrador['id']) is not None:
-            self.__tela_narrador.mostra_mensagem("ATENÇÃO: Narrador não existente")
+            self.__tela_narrador.mostra_mensagem("ATENÇÃO: Narrador já existente")
         else:
             narrador = Narrador(dados_narrador["id"], dados_narrador["nome"], dados_narrador["idade"],
                                 dados_narrador["temperamento"])
-            self.__narradores.append(narrador)
+            self.__narradorDAO.add(narrador)
             self.__tela_narrador.mostra_mensagem("Narrador inserido com sucesso")
 
     def alterar_narrador(self):
         self.lista_narradores()
-        if self.__narradores:
+        narradores = self.__narradorDAO.get_all()
+        if narradores:
             id_narrador = self.__tela_narrador.seleciona_narrador()
             narrador = self.lista_por_id(id_narrador)
             if narrador is not None:
@@ -48,6 +49,7 @@ class ControladorNarrador:
                 narrador.nome = novos_dados_narrador["nome"]
                 narrador.idade = novos_dados_narrador["idade"]
                 narrador.temperamento = novos_dados_narrador["temperamento"]
+                self.__narradorDAO.update(narrador)
                 self.lista_narradores()
                 self.__tela_narrador.mostra_mensagem("Narrador alterado com sucesso")
             else:
@@ -55,11 +57,12 @@ class ControladorNarrador:
 
     def excluir_narrador(self):
         self.lista_narradores()
-        if self.__narradores:
+        narradores = self.__narradorDAO.get_all()
+        if narradores:
             id_narrador = self.__tela_narrador.seleciona_narrador()
             narrador = self.lista_por_id(id_narrador)
             if narrador is not None:
-                self.__narradores.remove(narrador)
+                self.__narradorDAO.remove(narrador.id)
                 self.__tela_narrador.mostra_mensagem("Narrador excluído com sucesso")
             else:
                 self.__tela_narrador.mostra_mensagem("ATENÇÃO: Narrador não existente")
