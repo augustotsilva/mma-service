@@ -17,15 +17,18 @@ class ControladorLuta:
         if len(lutas) == 0:
             self.__tela_luta.mostra_mensagem('\nLista de Lutas está vazia\n')
         else:
+            dados_lutas = []
             for luta in lutas:
                 lista_narradores = []
                 for narrador in luta.narradores:
                     nome_narrador = narrador.nome
                     lista_narradores.append(nome_narrador)
-                self.__tela_luta.mostra_luta(
+
+                dados_lutas.append(
                     {'id': luta.id, 'lutador1': luta.lutador1.nome, 'lutador2': luta.lutador2.nome,
                      'narradores': lista_narradores, 'data': luta.data, 'vencedor': luta.vencedor.nome,
                      'card': luta.card, 'local': luta.local})
+                self.__tela_luta.mostra_luta(dados_lutas)
 
     def incluir_luta(self):
         dados_luta = self.__tela_luta.pega_dados_luta()

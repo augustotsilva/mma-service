@@ -41,10 +41,12 @@ class ControladorLutador:
         if len(lutadores) == 0:
             self.__tela_lutador.mostra_mensagem('\nLista de Lutadores está vazia\n')
         else:
+            dados_lutadores = []
             for lutador in lutadores:
-                self.__tela_lutador.mostra_lutador(
+                dados_lutadores.append(
                     {'nome': lutador.nome, 'idade': lutador.idade, 'id': lutador.id, 'altura': lutador.altura,
                      'peso': lutador.peso, 'envergadura': lutador.envergadura})
+            self.__tela_lutador.mostra_lutador(dados_lutadores)
 
     def lista_lutadores_por_peso(self):
         lutadores = self.__lutadorDAO.get_all()
@@ -55,7 +57,7 @@ class ControladorLutador:
 
         for lutador in lutadores:
             try:
-                if peso - 1 <= lutador.peso <= peso + 1:
+                if peso - 1 <= lutador.peso and lutador.peso <= peso + 1:
                     self.__tela_lutador.mostra_lutador(
                         {'nome': lutador.nome, 'idade': lutador.idade, 'id': lutador.id, 'altura': lutador.altura,
                          'peso': lutador.peso, 'envergadura': lutador.envergadura})
