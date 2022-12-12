@@ -5,27 +5,27 @@ from view.view_luta import TelaLuta
 
 class ControladorLuta:
     def __init__(self, controlador_sistema):
-        self.__lutas = []
         self.__tela_luta = TelaLuta(self)
         self.__lutaDAO = LutaDAO()
         self.__controlador_sistema = controlador_sistema
 
     def pega_luta_por_id(self, id: int):
-        for luta in self.__lutas:
-            if luta.id == id:
-                return luta
-        return None
+        return self.__lutaDAO.get(id)
 
     def lista_lutas(self):
-        if len(self.__lutas) == 0:
+        lutas = self.__lutaDAO.get_all()
+        if len(lutas) == 0:
             self.__tela_luta.mostra_mensagem('\nLista de Lutas está vazia\n')
         else:
-            for luta in self.__lutas:
+            for luta in lutas:
                 lista_narradores = []
                 for narrador in luta.narradores:
                     nome_narrador = narrador.nome
                     lista_narradores.append(nome_narrador)
-                self.__tela_luta.mostra_luta({'id': luta.id, 'lutador1': luta.lutador1.nome, 'lutador2': luta.lutador2.nome, 'narradores': lista_narradores, 'data': luta.data, 'vencedor': luta.vencedor.nome, 'card': luta.card, 'local': luta.local})
+                self.__tela_luta.mostra_luta(
+                    {'id': luta.id, 'lutador1': luta.lutador1.nome, 'lutador2': luta.lutador2.nome,
+                     'narradores': lista_narradores, 'data': luta.data, 'vencedor': luta.vencedor.nome,
+                     'card': luta.card, 'local': luta.local})
 
     def incluir_luta(self):
         dados_luta = self.__tela_luta.pega_dados_luta()
@@ -71,11 +71,12 @@ class ControladorLuta:
         local = dados_luta['local']
 
         luta = Luta(id, lutador1, lutador2, narradores, data, vencedor, card, local)
-        self.__lutas.append(luta)
+        self.__lutaDAO.add(luta)
         return self.__tela_luta.mostra_mensagem('\nLuta incluida com sucesso!\n')
 
     def excluir_luta(self):
-        if len(self.__lutas) != 0:
+        lutas = self.__lutaDAO.get_all()
+        if len(lutas) != 0:
             self.lista_lutas()
         else:
             return self.__tela_luta.mostra_mensagem('\nNão é possível exluir uma Luta pois não existe nenhuma\n')
@@ -83,20 +84,21 @@ class ControladorLuta:
         luta = self.__tela_luta.seleciona_luta()
 
         if luta is not None:
-            self.__lutas.remove(luta)
+            self.__lutaDAO.remove(luta.id)
             self.__tela_luta.mostra_mensagem('\nLuta excluida com sucesso!\n')
 
     def alterar_luta(self):
-        if len(self.__lutas) != 0:
+        lutas = self.__lutaDAO.get_all()
+        if len(lutas) != 0:
             self.lista_lutas()
         else:
             return self.__tela_luta.mostra_mensagem('\nNão é possível alterar uma Luta pois não existe nenhuma\n')
-        
+
         luta = self.__tela_luta.seleciona_luta()
 
         if luta is not None:
             novos_dados_luta = self.__tela_luta.pega_dados_luta()
-            
+
             try:
                 lutador1 = self.__controlador_sistema.controlador_lutador.pega_lutador_por_id(novos_dados_luta["id_lutador1"])
                 if lutador1 is None:
@@ -139,6 +141,7 @@ class ControladorLuta:
             luta.vencedor = vencedor
             luta.card = novos_dados_luta["card"]
             luta.local = novos_dados_luta["local"]
+            self.__lutaDAO.update(luta)
             self.lista_lutas()
 
     def retornar(self):
