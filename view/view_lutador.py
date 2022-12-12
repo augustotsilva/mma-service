@@ -19,15 +19,13 @@ class TelaLutador:
             opcao = 4
         if values['5']:
             opcao = 5
-    # cobre os casos de Retornar, fechar janela, ou clicar cancelar
-    #Isso faz com que retornemos a tela do sistema caso qualquer uma dessas coisas aconteca
+
         if values['0'] or button in (None, 'Cancelar'):
             opcao = 0
         self.close()
         return opcao
 
     def init_opcoes(self):
-    # sg.theme_previewer()
         sg.ChangeLookAndFeel('DarkTeal4')
         layout = [
         [sg.Text('-------- LUTADORES ----------', font=("Helvica", 25))],
